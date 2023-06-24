@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const getListings = gql`
   query GetListings($input: ListingsInput!) {
@@ -7,4 +7,4 @@ export const getListings = gql`
       town
     }
   }
-`
+`;

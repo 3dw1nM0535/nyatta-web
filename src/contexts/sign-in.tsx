@@ -1,12 +1,12 @@
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction } from "react";
 
-import { Status, SignInForm } from '@types'
+import { Status, SignInForm } from "@types";
 
 interface SignInContext {
-  status: Status | undefined
-  setStatus: Dispatch<SetStateAction<Status>>
-  signInForm: SignInForm | undefined
-  setSignInForm: Dispatch<SetStateAction<SignInForm>>
+  status: Status | undefined;
+  setStatus: Dispatch<SetStateAction<Status>>;
+  signInForm: SignInForm | undefined;
+  setSignInForm: Dispatch<SetStateAction<SignInForm>>;
 }
 
 export const SignInContext = createContext<SignInContext>({
@@ -14,4 +14,4 @@ export const SignInContext = createContext<SignInContext>({
   setStatus: () => {},
   signInForm: undefined,
   setSignInForm: () => {},
-})
+});

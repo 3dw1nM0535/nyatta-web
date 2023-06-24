@@ -1,26 +1,46 @@
-import { useMutation } from '@apollo/client'
-import { Button, FormControl, FormLabel, FormHelperText, FormErrorMessage, Stack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader } from '@chakra-ui/react'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useMutation } from "@apollo/client";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  FormErrorMessage,
+  Stack,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+} from "@chakra-ui/react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
-import { verifyVerificationCode as VERIFY_VERIFICATION_CODE } from '@gql'
-import { usePropertyOnboarding } from '@hooks'
+import { verifyVerificationCode as VERIFY_VERIFICATION_CODE } from "@gql";
+import { usePropertyOnboarding } from "@hooks";
 
 interface FormValues {
-  verificationCode: string
+  verificationCode: string;
 }
 
 interface Props {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const VerificationModal = ({ isOpen, onClose }: Props): JSX.Element => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
-  const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_VERIFICATION_CODE)
-  const { setStep, caretakerForm, setCaretakerVerified } = usePropertyOnboarding()
-  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+  const [verifyCode, { loading: verifyingCode }] = useMutation(
+    VERIFY_VERIFICATION_CODE
+  );
+  const { setStep, caretakerForm, setCaretakerVerified } =
+    usePropertyOnboarding();
+
   // Verify phone
-  const onSubmit: SubmitHandler<FormValues> = async data => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     await verifyCode({
       variables: {
         input: {
@@ -30,15 +50,15 @@ const VerificationModal = ({ isOpen, onClose }: Props): JSX.Element => {
         },
       },
       // Proceed next step if successfull
-      onCompleted: data => {
-        const status = data?.verifyVerificationCode.success
+      onCompleted: (data) => {
+        const status = data?.verifyVerificationCode.success;
         if (status === "approved") {
-          setCaretakerVerified(true)
-          setStep("units")
+          setCaretakerVerified(true);
+          setStep("units");
         }
       },
-    })
-  }
+    });
+  };
 
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -51,20 +71,34 @@ const VerificationModal = ({ isOpen, onClose }: Props): JSX.Element => {
               <FormLabel>Enter Code</FormLabel>
               <Stack direction="row">
                 <Input
-                  {...register("verificationCode", { required: { value: true, message: "Invalid code" } })}
+                  {...register("verificationCode", {
+                    required: { value: true, message: "Invalid code" },
+                  })}
                   type="number"
                 />
-                <Button type="submit" isLoading={verifyingCode} disabled={verifyingCode} colorScheme="green">Verify</Button>
+                <Button
+                  type="submit"
+                  isLoading={verifyingCode}
+                  disabled={verifyingCode}
+                  colorScheme="green"
+                >
+                  Verify
+                </Button>
               </Stack>
-              {(errors.verificationCode != null) && <FormErrorMessage>{errors?.verificationCode.message}</FormErrorMessage>}
-              <FormHelperText>Enter 6-digit code sent to your phone</FormHelperText>
+              {errors.verificationCode != null && (
+                <FormErrorMessage>
+                  {errors?.verificationCode.message}
+                </FormErrorMessage>
+              )}
+              <FormHelperText>
+                Enter 6-digit code sent to your phone
+              </FormHelperText>
             </FormControl>
           </form>
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};
 
-
-export default VerificationModal
+export default VerificationModal;

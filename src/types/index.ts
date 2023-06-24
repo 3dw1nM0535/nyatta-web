@@ -1,103 +1,111 @@
-export type Status = 'pending' | 'approved' | 'sign-in'
+export type Status = "pending" | "approved" | "sign-in";
 
 export interface SignInForm {
-  phone: number | undefined
-  countryCode: string | undefined
+  phone: number | undefined;
+  countryCode: string | undefined;
 }
 export interface VerifySignInForm {
-  code: number
+  code: number;
 }
 
-export type OnboardingStep = 'description' | 'location' | 'caretaker' | 'units' | 'shoot' | 'type'
+export type OnboardingStep =
+  | "description"
+  | "location"
+  | "caretaker"
+  | "units"
+  | "shoot"
+  | "type";
 
 export interface LocationOption {
-  readonly label: string
-  readonly value: string
-  readonly postalCode: string
-  readonly id: string
+  readonly label: string;
+  readonly value: string;
+  readonly postalCode: string;
+  readonly id: string;
 }
 
-export type PropertyType = 'apartment' | 'condo' | 'bungalow'
+export type PropertyType = "apartment" | "condo" | "bungalow";
 
 export interface FormValues {
-  name: string
-  propertyType: PropertyType | undefined
-  minPrice: string
-  maxPrice: string
-  town: LocationOption
-  postalCode: string
-  units: Array<Unit>
+  name: string;
+  propertyType: PropertyType | undefined;
+  minPrice: string;
+  maxPrice: string;
+  town: LocationOption;
+  postalCode: string;
+  units: Array<Unit>;
 }
 
 export interface DescriptionForm {
-  name: string
-  propertyType: PropertyType | undefined
+  name: string;
+  propertyType: PropertyType | undefined;
 }
 
 export interface LocationForm {
-  town: LocationOption | null
-  postalCode: string | undefined
+  town: LocationOption | null;
+  postalCode: string | undefined;
 }
 
 export interface PriceForm {
-  minPrice: number
-  maxPrice: number
+  minPrice: number;
+  maxPrice: number;
 }
 
 export interface CaretakerForm {
-  firstName: string
-  lastName: string
-  phoneNumber: string
-  idVerification: string
-  countryCode: string
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  idVerification: string;
+  countryCode: string;
 }
 
 interface Amenity {
-  id: number
-  value: string
-  label: string
-  category: string
+  id: number;
+  value: string;
+  label: string;
+  category: string;
 }
 
 interface Bedroom {
-  bedroomNumber: number
-  enSuite: string
-  master: string
+  bedroomNumber: number;
+  enSuite: string;
+  master: string;
 }
 
 interface Unit {
-  amenities: Amenity[]
-  name: string
-  type: string
-  baths: number
-  price: number
-  bedrooms: Bedroom[]
+  amenities: Amenity[];
+  name: string;
+  type: string;
+  baths: number;
+  price: number;
+  bedrooms: Bedroom[];
 }
 
 export interface UnitsForm {
-  units: Unit[]
+  units: Unit[];
 }
 
-export interface AmenitiesForm { amenities: Amenity[] }
+export interface AmenitiesForm {
+  amenities: Amenity[];
+}
 
 export interface PropertyTypeForm {
-  propertyType: PropertyType | undefined
+  propertyType: PropertyType | undefined;
 }
 
 export interface ContactPersonForm {
-  contactPerson: string | undefined
-  shootDate: string | undefined
+  contactPerson: string | undefined;
+  shootDate: string | undefined;
 }
 
 export interface UserOnboardingForm {
-  avatar: string
-  firstName: string
-  lastName: string
+  avatar: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface SearchListingsForm {
-  town: string
-  minPrice: number
-  maxPrice: number
-  propertyType: PropertyType | undefined
+  town: string;
+  minPrice: number;
+  maxPrice: number;
+  propertyType: PropertyType | undefined;
 }

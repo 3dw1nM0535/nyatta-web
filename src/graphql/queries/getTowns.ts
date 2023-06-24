@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const getTowns = gql`
   query GetTowns {
@@ -8,4 +8,4 @@ export const getTowns = gql`
       postalCode
     }
   }
-`
+`;

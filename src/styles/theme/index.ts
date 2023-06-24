@@ -1,11 +1,11 @@
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 
-import { Button } from './button'
+import { Button } from "./button";
 
 const colorConfig: ThemeConfig = {
-  initialColorMode: 'light',
-  useSystemColorMode: false
-}
+  initialColorMode: "light",
+  useSystemColorMode: false,
+};
 
 export const theme = extendTheme({
   config: colorConfig,
@@ -13,17 +13,17 @@ export const theme = extendTheme({
     Button,
     FormLabel: {
       baseStyle: {
-        fontWeight: 'bold'
-      }
-    }
+        fontWeight: "bold",
+      },
+    },
   },
   fonts: {
-    heading: 'var(--font-ibm-plex-mono)',
-    body: 'var(--font-ibm-plex-mono)',
+    heading: "var(--font-ibm-plex-mono)",
+    body: "var(--font-ibm-plex-mono)",
   },
   styles: {
-    global: () => ({})
-  }
-})
+    global: () => ({}),
+  },
+});
 
-export { chakraStylesConfig } from './chakra-select'
+export { chakraStylesConfig } from "./chakra-select";

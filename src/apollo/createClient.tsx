@@ -1,23 +1,30 @@
-import { ApolloClient, InMemoryCache, from, type NormalizedCacheObject } from '@apollo/client'
-import { RetryLink } from '@apollo/client/link/retry'
-import { type CookieValueTypes } from 'cookies-next'
+import {
+  ApolloClient,
+  InMemoryCache,
+  from,
+  type NormalizedCacheObject,
+} from "@apollo/client";
+import { RetryLink } from "@apollo/client/link/retry";
+import { type CookieValueTypes } from "cookies-next";
 
-import { authLink, errorLink, httpLink } from './links'
+import { authLink, errorLink, httpLink } from "./links";
 
-export const createClient = (jwt?: CookieValueTypes): ApolloClient<NormalizedCacheObject> => {
+export const createClient = (
+  jwt?: CookieValueTypes
+): ApolloClient<NormalizedCacheObject> => {
   // Caching
-  const cache = new InMemoryCache({})
+  const cache = new InMemoryCache({});
   // Error retry link
   const retryLink = new RetryLink({
     delay: {
       initial: 300,
-      jitter: true
+      jitter: true,
     },
     attempts: {
       max: 2,
-      retryIf: error => !!error
-    }
-  })
+      retryIf: (error) => !!error,
+    },
+  });
 
   return new ApolloClient({
     link: from([
@@ -27,16 +34,17 @@ export const createClient = (jwt?: CookieValueTypes): ApolloClient<NormalizedCac
       errorLink,
       retryLink,
       // api link
-      httpLink
+      httpLink,
     ]),
     cache,
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'cache-and-network' as const
-      }
-    }
-  })
-}
+        fetchPolicy: "cache-and-network" as const,
+      },
+    },
+  });
+};
 
-let apolloClient: ApolloClient<NormalizedCacheObject> | null
-export const getApolloClient = (): ApolloClient<NormalizedCacheObject> | null => apolloClient
+let apolloClient: ApolloClient<NormalizedCacheObject> | null;
+export const getApolloClient = (): ApolloClient<NormalizedCacheObject> | null =>
+  apolloClient;

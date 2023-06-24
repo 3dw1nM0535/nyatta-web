@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
-import { Center, Spinner } from '@chakra-ui/react'
-import { useSession } from 'next-auth/react'
+import { Center, Spinner } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const AppProvider = ({ children }: Props) => {
-  const { status } = useSession()
+  const { status } = useSession();
 
   // wait for auth
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <Center>
         <Spinner thickness="8px" color="green.700" size="xl" />
       </Center>
-    )
+    );
   }
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export default AppProvider
+export default AppProvider;

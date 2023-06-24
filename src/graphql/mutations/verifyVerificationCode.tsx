@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const verifyVerificationCode = gql`
   mutation VerifyVerificationCode($input: VerificationInput!) {
@@ -6,4 +6,4 @@ export const verifyVerificationCode = gql`
       success
     }
   }
-`
+`;

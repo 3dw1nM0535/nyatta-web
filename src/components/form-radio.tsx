@@ -1,14 +1,29 @@
-import { FormControl, SimpleGrid, FormErrorMessage, FormLabel, useRadioGroup } from '@chakra-ui/react'
-import { useController } from 'react-hook-form'
+import {
+  FormControl,
+  SimpleGrid,
+  FormErrorMessage,
+  FormLabel,
+  useRadioGroup,
+} from "@chakra-ui/react";
+import { useController } from "react-hook-form";
 
-import CustomRadio from './custom-radio'
+import CustomRadio from "./custom-radio";
 
-const FormRadio = ({ control, columns=2, options, name, label }: any): JSX.Element => {
-  const { field, fieldState: { error } } = useController({
+const FormRadio = ({
+  control,
+  columns = 2,
+  options,
+  name,
+  label,
+}: any): JSX.Element => {
+  const {
+    field,
+    fieldState: { error },
+  } = useController({
     name,
     control,
-  })
-  const { getRootProps, getRadioProps } = useRadioGroup(field)
+  });
+  const { getRootProps, getRadioProps } = useRadioGroup(field);
 
   return (
     <FormControl isInvalid={!!error}>
@@ -25,7 +40,7 @@ const FormRadio = ({ control, columns=2, options, name, label }: any): JSX.Eleme
       </SimpleGrid>
       {error && <FormErrorMessage mb={5}>{error.message}</FormErrorMessage>}
     </FormControl>
-  )
-}
+  );
+};
 
-export default FormRadio
+export default FormRadio;

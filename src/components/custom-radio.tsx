@@ -1,12 +1,21 @@
-import { Icon } from '@chakra-ui/icons'
-import { Box, VStack, HStack, UseRadioProps, useRadio, Text } from '@chakra-ui/react'
-import { FaCheckCircle, FaRegCircle } from 'react-icons/fa'
+import { Icon } from "@chakra-ui/icons";
+import {
+  Box,
+  VStack,
+  HStack,
+  UseRadioProps,
+  useRadio,
+  Text,
+} from "@chakra-ui/react";
+import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 
-const CustomRadio = (props: UseRadioProps & { label: string, description?: string }) => {
-  const { state, getInputProps, getCheckboxProps } = useRadio(props)
-  const input = getInputProps()
-  const checkbox = getCheckboxProps()
-  const isChecked = state.isChecked
+const CustomRadio = (
+  props: UseRadioProps & { label: string; description?: string }
+) => {
+  const { state, getInputProps, getCheckboxProps } = useRadio(props);
+  const input = getInputProps();
+  const checkbox = getCheckboxProps();
+  const isChecked = state.isChecked;
 
   return (
     <Box as="label" mb={5}>
@@ -17,14 +26,14 @@ const CustomRadio = (props: UseRadioProps & { label: string, description?: strin
         border="1px solid"
         borderRadius="md"
         _checked={{
-          color: "green"
+          color: "green",
         }}
-        shadow={isChecked ? 'md' : undefined}
+        shadow={isChecked ? "md" : undefined}
         align="start"
         p={4}
         _disabled={{
           opacity: 0.4,
-          cursor: 'not-allowed',
+          cursor: "not-allowed",
         }}
       >
         <HStack spacing={4} justify="space-between" w="full">
@@ -34,7 +43,7 @@ const CustomRadio = (props: UseRadioProps & { label: string, description?: strin
         {props.description && <Text fontSize="sm">{props.description}</Text>}
       </VStack>
     </Box>
-  )
-}
+  );
+};
 
-export default CustomRadio
+export default CustomRadio;

@@ -1,37 +1,48 @@
-import { type Dispatch, type SetStateAction, createContext } from 'react'
+import { type Dispatch, type SetStateAction, createContext } from "react";
 
-import { type GroupBase } from 'react-select'
+import { type GroupBase } from "react-select";
 
-import { type OnboardingStep, type DescriptionForm, type PriceForm, type LocationForm, type CaretakerForm, type UnitsForm, type LocationOption, type AmenitiesForm, type PropertyTypeForm, type ContactPersonForm } from '@types'
+import {
+  type OnboardingStep,
+  type DescriptionForm,
+  type PriceForm,
+  type LocationForm,
+  type CaretakerForm,
+  type UnitsForm,
+  type LocationOption,
+  type AmenitiesForm,
+  type PropertyTypeForm,
+  type ContactPersonForm,
+} from "@types";
 
 interface OnboardingContext {
-  step: OnboardingStep
-  setStep: Dispatch<SetStateAction<OnboardingStep>>
-  towns: GroupBase<LocationOption>[]
-  descriptionForm: DescriptionForm
-  setDescriptionForm: Dispatch<SetStateAction<DescriptionForm>>
-  locationForm: LocationForm
-  setLocationForm: Dispatch<SetStateAction<LocationForm>>
-  priceForm: PriceForm
-  setPriceForm: Dispatch<SetStateAction<PriceForm>>
-  unitsForm: UnitsForm
-  setUnitsForm: Dispatch<SetStateAction<UnitsForm>>
-  caretakerForm: CaretakerForm
-  setCaretakerForm: Dispatch<SetStateAction<CaretakerForm>>
-  unitsCount: number
-  setUnitsCount: Dispatch<SetStateAction<number>>
-  amenitiesForm: AmenitiesForm
-  setAmenitiesForm: Dispatch<SetStateAction<AmenitiesForm>>
-  caretakerVerified: boolean
-  setCaretakerVerified: Dispatch<SetStateAction<boolean>>
-  propertyType: PropertyTypeForm
-  setPropertyType: Dispatch<SetStateAction<PropertyTypeForm>>
-  contactPersonForm: ContactPersonForm
-  setContactPersonForm: Dispatch<SetStateAction<ContactPersonForm>>
+  step: OnboardingStep;
+  setStep: Dispatch<SetStateAction<OnboardingStep>>;
+  towns: GroupBase<LocationOption>[];
+  descriptionForm: DescriptionForm;
+  setDescriptionForm: Dispatch<SetStateAction<DescriptionForm>>;
+  locationForm: LocationForm;
+  setLocationForm: Dispatch<SetStateAction<LocationForm>>;
+  priceForm: PriceForm;
+  setPriceForm: Dispatch<SetStateAction<PriceForm>>;
+  unitsForm: UnitsForm;
+  setUnitsForm: Dispatch<SetStateAction<UnitsForm>>;
+  caretakerForm: CaretakerForm;
+  setCaretakerForm: Dispatch<SetStateAction<CaretakerForm>>;
+  unitsCount: number;
+  setUnitsCount: Dispatch<SetStateAction<number>>;
+  amenitiesForm: AmenitiesForm;
+  setAmenitiesForm: Dispatch<SetStateAction<AmenitiesForm>>;
+  caretakerVerified: boolean;
+  setCaretakerVerified: Dispatch<SetStateAction<boolean>>;
+  propertyType: PropertyTypeForm;
+  setPropertyType: Dispatch<SetStateAction<PropertyTypeForm>>;
+  contactPersonForm: ContactPersonForm;
+  setContactPersonForm: Dispatch<SetStateAction<ContactPersonForm>>;
 }
 
 export const OnboardingContext = createContext<OnboardingContext>({
-  step: 'description',
+  step: "description",
   setStep: () => {},
   towns: [],
   descriptionForm: {} as DescriptionForm,
@@ -53,5 +64,5 @@ export const OnboardingContext = createContext<OnboardingContext>({
   propertyType: {} as PropertyTypeForm,
   setPropertyType: () => {},
   contactPersonForm: {} as ContactPersonForm,
-  setContactPersonForm: () => {}
-})
+  setContactPersonForm: () => {},
+});

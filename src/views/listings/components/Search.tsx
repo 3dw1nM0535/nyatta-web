@@ -1,37 +1,46 @@
-import { Button, Flex, FormControl, FormErrorMessage, Input, Select as ChakraSelect } from '@chakra-ui/react'
-import { Select, type GroupBase } from 'chakra-react-select'
-import { Controller, type SubmitHandler } from 'react-hook-form'
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  Select as ChakraSelect,
+} from "@chakra-ui/react";
+import { Select, type GroupBase } from "chakra-react-select";
+import { Controller, type SubmitHandler } from "react-hook-form";
 
-import { usePropertyOnboarding, useSearchListings } from '@hooks'
-import { chakraStylesConfig } from '@styles'
+import { usePropertyOnboarding, useSearchListings } from "@hooks";
+import { chakraStylesConfig } from "@styles";
 
 const Search = () => {
-  const { towns } = usePropertyOnboarding()
-  const { control, getListings, handleSubmit, register, formState: { errors } } = useSearchListings()
-  const onSubmit: SubmitHandler<any> = async data => {
+  const { towns } = usePropertyOnboarding();
+  const {
+    control,
+    getListings,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useSearchListings();
+  const onSubmit: SubmitHandler<any> = async (data) => {
     await getListings({
       variables: {
         input: {
           town: data.town.label,
           minPrice: Number(data.minPrice),
-          maxPrice: Number(data.maxPrice)
-        }
-      }
-    })
-  }
+          maxPrice: Number(data.maxPrice),
+        },
+      },
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* TODO accordion collapse for mobile view */}
-      <Flex
-        p={5}
-        gap={4}
-        flexDirection={{ md: 'row', base: 'column' }}
-      >
+      <Flex p={5} gap={4} flexDirection={{ md: "row", base: "column" }}>
         <FormControl isInvalid={!(errors.town == null)}>
           <Controller
             name="town"
-            rules={{ required: { value: true, message: 'This is required' } }}
+            rules={{ required: { value: true, message: "This is required" } }}
             control={control}
             render={({ field }) => (
               <Select
@@ -39,15 +48,20 @@ const Search = () => {
                 chakraStyles={chakraStylesConfig}
                 isClearable
                 isSearchable
-                options={(towns as unknown) as GroupBase<string>[]}
+                options={towns as unknown as GroupBase<string>[]}
                 placeholder="Town"
               />
             )}
           />
-          {(errors.town != null) && <FormErrorMessage>{`${errors.town.message}`}</FormErrorMessage>}
+          {errors.town != null && (
+            <FormErrorMessage>{`${errors.town.message}`}</FormErrorMessage>
+          )}
         </FormControl>
         <FormControl isInvalid={!(errors.propertyType == null)}>
-          <ChakraSelect {...register('propertyType', { required: 'Select property type' })} placeholder="Property type">
+          <ChakraSelect
+            {...register("propertyType", { required: "Select property type" })}
+            placeholder="Property type"
+          >
             <option value="single">Single room</option>
             <option value="studio">Studio</option>
             <option value="1">1 bedroom</option>
@@ -55,11 +69,13 @@ const Search = () => {
             <option value="3">3 bedrooms</option>
             <option value="4">4 bedrooms</option>
           </ChakraSelect>
-          {(errors.propertyType != null) && <FormErrorMessage>{`${errors.propertyType.message}`}</FormErrorMessage>}
+          {errors.propertyType != null && (
+            <FormErrorMessage>{`${errors.propertyType.message}`}</FormErrorMessage>
+          )}
         </FormControl>
         <FormControl>
           <Input
-            {...register('minPrice')}
+            {...register("minPrice")}
             type="number"
             placeholder="Min price"
             defaultValue="0"
@@ -67,7 +83,7 @@ const Search = () => {
         </FormControl>
         <FormControl>
           <Input
-            {...register('maxPrice')}
+            {...register("maxPrice")}
             type="number"
             placeholder="Max price"
           />
@@ -79,7 +95,7 @@ const Search = () => {
         </Flex>
       </Flex>
     </form>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

@@ -1,2 +1,2 @@
-export { getApolloClient } from './createClient'
-export * from './queries'
+export { getApolloClient } from "./createClient";
+export * from "./queries";

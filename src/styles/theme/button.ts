@@ -1,13 +1,13 @@
-import { defineStyleConfig } from '@chakra-ui/react'
+import { defineStyleConfig } from "@chakra-ui/react";
 
 export const Button = defineStyleConfig({
   variants: {
     solid: {
-      bg: 'green.700',
+      bg: "green.700",
     },
   },
   defaultProps: {
-    colorScheme: 'green',
-    variant: 'solid',
+    colorScheme: "green",
+    variant: "solid",
   },
-})
+});

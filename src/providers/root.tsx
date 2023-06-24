@@ -1,29 +1,33 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
-import { ApolloProvider, type ApolloClient, type NormalizedCacheObject } from '@apollo/client'
-import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
-import { getCookie } from 'cookies-next'
-import Head from 'next/head'
-import { SessionProvider } from 'next-auth/react'
+import {
+  ApolloProvider,
+  type ApolloClient,
+  type NormalizedCacheObject,
+} from "@apollo/client";
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider } from "@chakra-ui/react";
+import { getCookie } from "cookies-next";
+import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
 
-import { createClient } from '../apollo/createClient'
+import { createClient } from "../apollo/createClient";
 
-import { OnboardingProvider } from './property-onboarding'
-import { SearchListingProvider } from './search-listings'
+import { OnboardingProvider } from "./property-onboarding";
+import { SearchListingProvider } from "./search-listings";
 
-import { theme } from '@styles'
-import SignInProvider from 'providers/sign-in'
+import { theme } from "@styles";
+import SignInProvider from "providers/sign-in";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const Providers = ({ children }: Props) => {
-  const jwt = getCookie('jwt')
-  const client = createClient(jwt)
+  const jwt = getCookie("jwt");
+  const client = createClient(jwt);
 
   return (
     <>
@@ -39,9 +43,7 @@ const Providers = ({ children }: Props) => {
             <SessionProvider>
               <SearchListingProvider>
                 <OnboardingProvider>
-                  <SignInProvider>
-                    {children}
-                  </SignInProvider>
+                  <SignInProvider>{children}</SignInProvider>
                 </OnboardingProvider>
               </SearchListingProvider>
             </SessionProvider>
@@ -49,7 +51,7 @@ const Providers = ({ children }: Props) => {
         </CacheProvider>
       </ApolloProvider>
     </>
-  )
-}
+  );
+};
 
-export default Providers
+export default Providers;

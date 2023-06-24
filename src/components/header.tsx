@@ -1,8 +1,8 @@
-import { Flex, IconButton, Text } from '@chakra-ui/react'
-import Link from 'next/link'
-import { FaBars } from 'react-icons/fa'
+import { Flex, IconButton, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import { FaBars } from "react-icons/fa";
 
-import UserMenu from './user-profile'
+import UserMenu from "./user-profile";
 
 const Header = (): JSX.Element => (
   <Flex
@@ -14,17 +14,19 @@ const Header = (): JSX.Element => (
     zIndex="1"
     borderBottomWidth="1px"
     borderBottomColor="gray.200"
-    justifyContent={{base: "space-between", md: "flex-start" }}
+    justifyContent={{ base: "space-between", md: "flex-start" }}
   >
     <Flex display={{ base: "none", md: "flex" }} alignItems="center">
-      <Text fontSize="4xl" fontWeight="bold">Nyatta</Text>
+      <Text fontSize="4xl" fontWeight="bold">
+        Nyatta
+      </Text>
       <Flex gap={4} cursor="pointer" mx={8}>
         <Link href="/listings">Listings</Link>
         <Link href="/landlord/setup">Property Owner</Link>
       </Flex>
-      </Flex>
+    </Flex>
     <IconButton
-      display={{base: "flex", md: "none"}}
+      display={{ base: "flex", md: "none" }}
       aria-label="open menu"
       variant="outline"
       icon={<FaBars />}
@@ -33,6 +35,6 @@ const Header = (): JSX.Element => (
       <UserMenu />
     </Flex>
   </Flex>
-)
+);
 
-export default Header
+export default Header;

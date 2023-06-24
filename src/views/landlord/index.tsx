@@ -1,16 +1,22 @@
-'use client'
+"use client";
 
-import { Container, HStack } from '@chakra-ui/react'
-import Head from 'next/head'
+import { Container, HStack } from "@chakra-ui/react";
+import Head from "next/head";
 
-import { Title } from './components'
-import { Description, Location, Units, Caretaker, PropertyType, Shoot } from './steps'
+import { Title } from "./components";
+import {
+  Description,
+  Location,
+  Units,
+  Caretaker,
+  PropertyType,
+  Shoot,
+} from "./steps";
 
-import { usePropertyOnboarding } from '@hooks'
-
+import { usePropertyOnboarding } from "@hooks";
 
 const Landlord = () => {
-  const { step } = usePropertyOnboarding()
+  const { step } = usePropertyOnboarding();
 
   return (
     <Container>
@@ -20,14 +26,14 @@ const Landlord = () => {
       <HStack my={{ base: 4, md: 6 }}>
         <Title />
       </HStack>
-      {step === 'description' && <Description />}
-      {step === 'location' && <Location />}
-      {step === 'units' && <Units />}
-      {step === 'caretaker' && <Caretaker />}
-      {step === 'type' && <PropertyType />}
-      {step === 'shoot' && <Shoot />}
+      {step === "description" && <Description />}
+      {step === "location" && <Location />}
+      {step === "units" && <Units />}
+      {step === "caretaker" && <Caretaker />}
+      {step === "type" && <PropertyType />}
+      {step === "shoot" && <Shoot />}
     </Container>
-  )
-}
+  );
+};
 
-export default Landlord
+export default Landlord;

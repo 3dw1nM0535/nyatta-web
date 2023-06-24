@@ -1,30 +1,25 @@
-'use client'
+"use client";
 
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
 
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text } from "@chakra-ui/react";
 
-import Header from '../components/header'
+import Header from "../components/header";
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => (
-  <Box
-    minH="100vh"
-    bg="white"
-  >
+  <Box minH="100vh" bg="white">
     <Header />
-    <Box p={4}>
-      {children}
-    </Box>
+    <Box p={4}>{children}</Box>
     <Box bottom="5" left="0" w="100%" textAlign="center" position="fixed">
       <Text
         as="a"
         href="mailto:edwinmoses535@gmail.com"
         _hover={{
-          cursor: 'pointer'
+          cursor: "pointer",
         }}
         textDecoration="underline"
       >
@@ -32,6 +27,6 @@ const Layout = ({ children }: LayoutProps) => (
       </Text>
     </Box>
   </Box>
-)
+);
 
-export default Layout
+export default Layout;

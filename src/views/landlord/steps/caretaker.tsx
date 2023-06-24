@@ -1,55 +1,86 @@
-import { useMutation } from '@apollo/client'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { Box, Center, Button, HStack, Image, FormControl, FormErrorMessage, FormHelperText, FormLabel, Icon, Input, Spacer, Stack, Textarea, useDisclosure, Spinner, Select } from '@chakra-ui/react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useDropzone } from 'react-dropzone'
-import { useForm, type SubmitHandler } from 'react-hook-form'
-import { FaUpload } from 'react-icons/fa'
+import { useMutation } from "@apollo/client";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Center,
+  Button,
+  HStack,
+  Image,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Icon,
+  Input,
+  Spacer,
+  Stack,
+  Textarea,
+  useDisclosure,
+  Spinner,
+  Select,
+} from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDropzone } from "react-dropzone";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { FaUpload } from "react-icons/fa";
 
-import { CaretakerSchema } from '../../../form/validations'
-import { VerificationModal } from '../components'
+import { CaretakerSchema } from "../../../form/validations";
+import { VerificationModal } from "../components";
 
-import { uploadImage as UPLOAD_IMAGE, sendVerificationCode as SEND_VERIFICATION_CODE, } from '@gql'
-import { usePropertyOnboarding } from '@hooks'
-import { type CaretakerForm } from '@types'
+import {
+  uploadImage as UPLOAD_IMAGE,
+  sendVerificationCode as SEND_VERIFICATION_CODE,
+} from "@gql";
+import { usePropertyOnboarding } from "@hooks";
+import { type CaretakerForm } from "@types";
 
 const Caretaker = (): JSX.Element => {
-  const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE)
-  const [sendVerification, { loading: sendingVerification }] = useMutation(SEND_VERIFICATION_CODE)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { setStep, caretakerForm, setCaretakerForm, caretakerVerified } = usePropertyOnboarding()
-  const { register, handleSubmit, setValue, formState: { errors }, trigger, watch } = useForm<CaretakerForm>({
+  const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
+  const [sendVerification, { loading: sendingVerification }] = useMutation(
+    SEND_VERIFICATION_CODE
+  );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { setStep, caretakerForm, setCaretakerForm, caretakerVerified } =
+    usePropertyOnboarding();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    trigger,
+    watch,
+  } = useForm<CaretakerForm>({
     defaultValues: caretakerForm,
-    resolver: yupResolver(CaretakerSchema)
-  })
+    resolver: yupResolver(CaretakerSchema),
+  });
   const handleDrop = async (acceptedFiles: File[]) => {
     await uploadImage({
       variables: {
-        file: acceptedFiles[0]
+        file: acceptedFiles[0],
       },
-      onCompleted: data => {
-        setValue('idVerification', data.uploadImage)
-        trigger('idVerification')
-      }
-    })
-  }
+      onCompleted: (data) => {
+        setValue("idVerification", data.uploadImage);
+        trigger("idVerification");
+      },
+    });
+  };
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png', '.gif']
+      "image/*": [".jpeg", ".jpg", ".png", ".gif"],
     },
     multiple: false,
     disabled: uploadingImage,
     onDrop: handleDrop,
-  })
+  });
 
   // Watch verification img changes
-  const idImg = watch('idVerification')
+  const idImg = watch("idVerification");
 
   // Start caretaker verification flow
-  const onSubmit: SubmitHandler<CaretakerForm> = async data => {
-    setCaretakerForm(data)
+  const onSubmit: SubmitHandler<CaretakerForm> = async (data) => {
+    setCaretakerForm(data);
     // Send verification code to phone
-    if (!caretakerVerified || (data.phoneNumber != caretakerForm.phoneNumber)) {
+    if (!caretakerVerified || data.phoneNumber != caretakerForm.phoneNumber) {
       await sendVerification({
         variables: {
           input: {
@@ -58,66 +89,70 @@ const Caretaker = (): JSX.Element => {
           },
         },
         // Proceed to next step once successfull
-        onCompleted: data => {
-          const status = data?.sendVerificationCode.success
+        onCompleted: (data) => {
+          const status = data?.sendVerificationCode.success;
           if (status === "pending") {
-            onOpen()
+            onOpen();
           }
         },
-      })
+      });
     } else {
-      setStep('units')
+      setStep("units");
     }
-  }
-   
+  };
+
   const goBack = (): void => {
-    setStep('location')
-  }
+    setStep("location");
+  };
 
   return (
     <>
-      <VerificationModal
-        onClose={onClose}
-        isOpen={isOpen}
-      />
+      <VerificationModal onClose={onClose} isOpen={isOpen} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack align="center" direction={{ base: 'column', md: 'row' }} spacing={{ base: 4, md: 6 }}>
+        <Stack
+          align="center"
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: 4, md: 6 }}
+        >
           <Box w="100%">
             <FormControl isInvalid={Boolean(errors?.firstName)}>
               <FormLabel>First Name</FormLabel>
-              <Input
-                {...register('firstName')}
-              />
-              {(errors.firstName != null) && <FormErrorMessage>{errors?.firstName.message}</FormErrorMessage>}
+              <Input {...register("firstName")} />
+              {errors.firstName != null && (
+                <FormErrorMessage>{errors?.firstName.message}</FormErrorMessage>
+              )}
             </FormControl>
             <FormControl isInvalid={Boolean(errors?.lastName)}>
               <FormLabel>Last Name</FormLabel>
-              <Input
-                {...register('lastName')}
-              />
-              {((errors?.lastName) != null) && <FormErrorMessage>{errors?.lastName.message}</FormErrorMessage>}
+              <Input {...register("lastName")} />
+              {errors?.lastName != null && (
+                <FormErrorMessage>{errors?.lastName.message}</FormErrorMessage>
+              )}
             </FormControl>
-            <FormControl isInvalid={Boolean(errors?.phoneNumber || errors?.countryCode)}>
+            <FormControl
+              isInvalid={Boolean(errors?.phoneNumber || errors?.countryCode)}
+            >
               <FormLabel>Phone Number</FormLabel>
               <HStack>
                 <Select {...register("countryCode")}>
                   <option value="+254">+254</option>
                 </Select>
-                <Input
-                  {...register('phoneNumber')}
-                  type="tel"
-                />
+                <Input {...register("phoneNumber")} type="tel" />
               </HStack>
-              {((errors?.phoneNumber) != null) && <FormErrorMessage>{errors?.phoneNumber.message}</FormErrorMessage>}
+              {errors?.phoneNumber != null && (
+                <FormErrorMessage>
+                  {errors?.phoneNumber.message}
+                </FormErrorMessage>
+              )}
             </FormControl>
           </Box>
           <FormControl isInvalid={Boolean(errors?.idVerification)}>
-          <FormLabel> Identification Document</FormLabel>
+            <FormLabel> Identification Document</FormLabel>
             <Textarea
               as={Center}
-              {...getRootProps({ className: 'dropzone' })}
+              {...getRootProps({ className: "dropzone" })}
               p={4}
-              minH={{ base: '80px', md: '100px' }}
+              minH={{ base: "80px", md: "100px" }}
               cursor="pointer"
               h="auto"
               justify={idImg ? "start" : "center"}
@@ -126,31 +161,52 @@ const Caretaker = (): JSX.Element => {
               borderColor="chakra-border-color"
               spacing={4}
             >
-              {idImg && !uploadingImage && <Image
-                src={idImg}
-                loading="eager"
-                maxW={{
-                  base: "100px",
-                  md: "200px"
-                }}
-                alt="ID Verification"
-              />}
+              {idImg && !uploadingImage && (
+                <Image
+                  src={idImg}
+                  loading="eager"
+                  maxW={{
+                    base: "100px",
+                    md: "200px",
+                  }}
+                  alt="ID Verification"
+                />
+              )}
               {!idImg && !uploadingImage && <Icon as={FaUpload} />}
               {uploadingImage && <Spinner size="lg" />}
             </Textarea>
-            <input {...register('idVerification')} {...getInputProps()} />
-            {((errors?.idVerification) != null) && <FormErrorMessage>{errors?.idVerification.message}</FormErrorMessage>}
+            <input {...register("idVerification")} {...getInputProps()} />
+            {errors?.idVerification != null && (
+              <FormErrorMessage>
+                {errors?.idVerification.message}
+              </FormErrorMessage>
+            )}
             <FormHelperText>Government issued document</FormHelperText>
           </FormControl>
         </Stack>
         <HStack mt={{ base: 4, md: 6 }}>
-          <Button colorScheme="green" disabled={sendingVerification} leftIcon={<ArrowBackIcon />} onClick={goBack}>Go back</Button>
+          <Button
+            colorScheme="green"
+            disabled={sendingVerification}
+            leftIcon={<ArrowBackIcon />}
+            onClick={goBack}
+          >
+            Go back
+          </Button>
           <Spacer />
-          <Button type="submit" colorScheme="green" disabled={sendingVerification} isLoading={sendingVerification} rightIcon={<ArrowForwardIcon />}>Next</Button>
+          <Button
+            type="submit"
+            colorScheme="green"
+            disabled={sendingVerification}
+            isLoading={sendingVerification}
+            rightIcon={<ArrowForwardIcon />}
+          >
+            Next
+          </Button>
         </HStack>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Caretaker
+export default Caretaker;

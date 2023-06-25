@@ -9,7 +9,7 @@ export const authOptions = (): AuthOptions => {
     }),
   ]
   const callbacks = {
-    async session({ session }) {
+    async session({ session }: any) {
       // call our own API to check if user is onboarded
       // to determine redirect URL
       if (session) {

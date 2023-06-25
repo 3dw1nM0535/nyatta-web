@@ -17,7 +17,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import { verifyVerificationCode as VERIFY_CODE, UPDATE_USER } from "@gql";
 import { useSignIn } from "@hooks";
-import { VerifySignInForm } from "@types";
+import { Session, VerifySignInForm } from "@types";
 import { VerifySignInSchema } from "form/validations";
 
 const VerifySignInForm = (): JSX.Element => {
@@ -48,7 +48,7 @@ const VerifySignInForm = (): JSX.Element => {
           // TODO trigger error with invalid code
           if (data.verifyVerificationCode.success === "pending") {
             setStatus("pending");
-          } else if (session?.onboarding === "true") {
+          } else if (((session as unknown) as Session)?.onboarding === "true") {
             await updateUser({
               variables: {
                 input: {

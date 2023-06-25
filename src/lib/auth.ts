@@ -1,18 +1,7 @@
 import type { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-interface Session {
-  user: {
-    name: string
-    email: string
-    image: string
-  },
-  expires: Date,
-  onboarding: string
-}
-
 export const authOptions = (): AuthOptions => {
-  let userSession: Session
   const providers = [
     GoogleProvider({
       clientId: `${process.env.GOOGLE_CLIENT_ID}`,
@@ -21,7 +10,7 @@ export const authOptions = (): AuthOptions => {
   ]
   const callbacks = {
     async session({ session }) {
-      // TODO call our own API to check if user is onboarded
+      // call our own API to check if user is onboarded
       // to determine redirect URL
       if (session) {
         try {

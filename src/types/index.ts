@@ -109,3 +109,13 @@ export interface SearchListingsForm {
   maxPrice: number;
   propertyType: PropertyType | undefined;
 }
+
+export interface Session {
+  user: {
+    name: string
+    email: string
+    image: string
+  },
+  expires: Date,
+  onboarding: string
+}

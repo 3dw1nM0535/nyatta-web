@@ -11,19 +11,20 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { verifyVerificationCode as VERIFY_CODE, HANDSHAKE_USER } from "@gql";
+import { verifyVerificationCode as VERIFY_CODE, UPDATE_USER } from "@gql";
 import { useSignIn } from "@hooks";
 import { VerifySignInForm } from "@types";
 import { VerifySignInSchema } from "form/validations";
 
 const VerifySignInForm = (): JSX.Element => {
-  const router = useRouter();
+  const router = useRouter()
+  const { data: session } = useSession();
   const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_CODE);
-  const [handshakeUser, { loading: handshaking }] = useMutation(HANDSHAKE_USER);
+  const [updateUser, { loading: creatingUser }] = useMutation(UPDATE_USER);
   const { setStatus, signInForm } = useSignIn();
   const {
     handleSubmit,
@@ -35,7 +36,6 @@ const VerifySignInForm = (): JSX.Element => {
 
   const onSubmit: SubmitHandler<VerifySignInForm> = async (data) => {
     if (!verifyingCode) {
-      // Synchronous
       await verifyCode({
         variables: {
           input: {
@@ -48,22 +48,22 @@ const VerifySignInForm = (): JSX.Element => {
           // TODO trigger error with invalid code
           if (data.verifyVerificationCode.success === "pending") {
             setStatus("pending");
-          } else {
-            await handshakeUser({
+          } else if (session?.onboarding === "true") {
+            await updateUser({
               variables: {
                 input: {
+                  first_name: session?.user?.name?.split(" ")[0],
+                  last_name: session?.user?.name?.split(" ")[1],
+                  email: session?.user?.email,
+                  avatar: session?.user?.image,
+                  onboarding: false,
                   phone: `${signInForm?.countryCode}${signInForm?.phone}`,
                 },
               },
-              onCompleted: (data) => {
-                setCookie("userId", data.handshake.id, { path: "/" });
-                if (data.handshake.onboarding) {
-                  router.push("/onboarding/user");
-                } else {
-                  router.push("/");
-                }
+              onCompleted: () => {
+                router.push('/')
               },
-            });
+            })
           }
         },
       });
@@ -76,7 +76,7 @@ const VerifySignInForm = (): JSX.Element => {
         <FormLabel>Verify Code</FormLabel>
         <HStack>
           <Input {...register("code")} type="number" />
-          <Button isLoading={verifyingCode || handshaking} type="submit">
+          <Button isLoading={verifyingCode || creatingUser} type="submit">
             Sign In
           </Button>
         </HStack>

@@ -36,7 +36,6 @@ const SignInForm = (): JSX.Element => {
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     setSignInForm(data);
     if (!sendingVerification) {
-      // Synchronous
       await sendVerificationCode({
         variables: {
           input: {

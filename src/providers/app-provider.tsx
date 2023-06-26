@@ -27,7 +27,7 @@ const AppProvider = ({ children }: Props) => {
     );
   } else if (status === 'authenticated' && ((session as unknown) as Session).onboarding === 'true') {
     router.push('/onboarding/user')
-  } else if (!session && PrivateRoutes.includes(pathname)) {
+  } else if (status === 'unauthenticated' && PrivateRoutes.includes(pathname)) {
     router.push('/login/user')
   }
 

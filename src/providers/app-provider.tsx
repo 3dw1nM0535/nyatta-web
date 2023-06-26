@@ -3,9 +3,10 @@
 import { ReactNode } from "react";
 
 import { Center, Spinner } from "@chakra-ui/react";
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useSession } from "next-auth/react";
 
+import { PrivateRoutes } from "@constants";
 import { Session } from "@types";
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 
 const AppProvider = ({ children }: Props) => {
   const router = useRouter()
+  const pathname = usePathname()
   const { data: session, status } = useSession();
 
   // wait for auth
@@ -24,8 +26,11 @@ const AppProvider = ({ children }: Props) => {
       </Center>
     );
   } else if (status === 'authenticated' && ((session as unknown) as Session).onboarding === 'true') {
+    router.push('/onboarding/user')
+  } else if (!session && PrivateRoutes.includes(pathname)) {
     router.push('/login/user')
   }
+
   return <>{children}</>;
 };
 

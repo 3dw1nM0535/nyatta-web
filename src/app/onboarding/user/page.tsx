@@ -1,4 +1,4 @@
-import Page from "views/onboarding/user";
+import Onboarding from "views/onboarding/user";
 
 // `/onboarding/user`
-export default Page;
+export default Onboarding;

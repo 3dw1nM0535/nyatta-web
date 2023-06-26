@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 
 import UserMenu from "./user-profile";
 
-const Header = (): JSX.Element => (
+const Header = ({ onOpen }: any): JSX.Element => (
   <Flex
     position="sticky"
     px={4}
@@ -26,6 +26,7 @@ const Header = (): JSX.Element => (
       </Flex>
     </Flex>
     <IconButton
+      onClick={onOpen}
       display={{ base: "flex", md: "none" }}
       aria-label="open menu"
       variant="outline"

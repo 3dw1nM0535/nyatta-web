@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   Flex,
   FormHelperText,
@@ -21,7 +20,7 @@ import data from "data/data.json";
 import { SearchListingsForm } from "types";
 
 const SearchForm = (): JSX.Element => {
-  const { control, register, reset } = useForm<SearchListingsForm>();
+  const { control, register } = useForm<SearchListingsForm>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -71,10 +70,11 @@ const SearchForm = (): JSX.Element => {
                 />
                 <FormHelperText>Select property type</FormHelperText>
               </FormControl>
-              <Flex w="100%" justifyContent="space-between">
+              {/*<Flex w="100%" justifyContent="space-between">
                 <Button onClick={() => reset()}>Clear</Button>
                 <Button>Found(0)</Button>
               </Flex>
+                */}
             </VStack>
           </ModalBody>
         </ModalContent>

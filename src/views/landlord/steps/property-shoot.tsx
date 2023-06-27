@@ -17,17 +17,20 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from 'next/navigation'
 import { useDropzone } from "react-dropzone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 
-import { uploadImage as UPLOAD_IMAGE } from "@gql";
+import { uploadImage as UPLOAD_IMAGE, SETUP_PROPERTY } from "@gql";
 import { usePropertyOnboarding } from "@hooks";
 import { type ContactPersonForm } from "@types";
 import { ContactPersonSchema } from "form/validations";
 
 const Shoot = (): JSX.Element => {
+  const router = useRouter();
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
+  const [setupProperty, { loading: settingupProperty }] = useMutation(SETUP_PROPERTY)
   const { setStep, caretakerForm, contactPersonForm, setContactPersonForm } =
     usePropertyOnboarding();
   const {
@@ -66,8 +69,15 @@ const Shoot = (): JSX.Element => {
   });
 
   const goBack = () => setStep("units");
-  const onSubmit: SubmitHandler<ContactPersonForm> = (data) => {
+  const onSubmit: SubmitHandler<ContactPersonForm> = async (data) => {
     setContactPersonForm(data);
+    await setupProperty({
+      variables: {
+        input: {
+        },
+      },
+      onCompleted: () => router.push('/'),
+    })
   };
 
   return (
@@ -151,6 +161,7 @@ const Shoot = (): JSX.Element => {
         <Spacer />
         <Button
           colorScheme="green"
+          isLoading={settingupProperty}
           type="submit"
           rightIcon={<ArrowForwardIcon />}
         >

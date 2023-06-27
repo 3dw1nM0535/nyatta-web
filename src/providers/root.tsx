@@ -40,7 +40,7 @@ const Providers = ({ children }: Props) => {
       <ApolloProvider client={client as ApolloClient<NormalizedCacheObject>}>
         <CacheProvider>
           <ChakraProvider theme={theme}>
-            <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
+            <SessionProvider refetchOnWindowFocus={true}>
               <SearchListingProvider>
                 <OnboardingProvider>
                   <SignInProvider>{children}</SignInProvider>

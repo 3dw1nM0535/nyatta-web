@@ -32,12 +32,19 @@ export const authOptions = (): AuthOptions => {
           const data = await res.json()
           session.onboarding = data.access_token
         } catch (err) {
-          console.log(err)
+          console.error(err)
         }
       } else {
         return session
       }
       return session
+    },
+    
+    async redirect({ url, baseUrl }: any) {
+      if (url.includes('/login/user')) {
+        return baseUrl
+      }
+      return url
     },
   }
   return { providers, callbacks }

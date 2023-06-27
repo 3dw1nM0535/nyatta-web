@@ -53,7 +53,7 @@ export const OnboardingProvider = ({ children }: PropsWithChildren) => {
     postalCode: item.postalCode,
   }));
 
-  const [step, setStep] = useState<OnboardingStep>("description");
+  const [step, setStep] = useState<OnboardingStep>("shoot");
 
   return (
     <OnboardingContext.Provider

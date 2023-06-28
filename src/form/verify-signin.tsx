@@ -64,6 +64,7 @@ const VerifySignInForm = (): JSX.Element => {
                 // update session
                 update()
                 router.push('/')
+                setStatus('sign-in')
               },
             })
           }

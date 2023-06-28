@@ -77,7 +77,7 @@ const Shoot = (): JSX.Element => {
           caretaker: {
             first_name: caretakerForm.firstName,
             last_name: caretakerForm.lastName,
-            idVefification: caretakerForm.idVerification,
+            idVerification: caretakerForm.idVerification,
             countryCode: "KE",
             phone: `${caretakerForm.countryCode}${caretakerForm.phoneNumber}`,
           },

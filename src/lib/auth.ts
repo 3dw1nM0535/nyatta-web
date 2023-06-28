@@ -15,7 +15,7 @@ export const authOptions = (): AuthOptions => {
       if (session) {
         try {
           const res = await fetch(
-            `http://localhost:4000/handshake`,
+            `${process.env.NEXT_PUBLIC_API}/handshake`,
             {
               method: "POST",
               headers: {

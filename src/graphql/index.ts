@@ -9,3 +9,4 @@ export * from "./mutations/verifyVerificationCode";
 export * from "./mutations/updateUser";
 export * from "./mutations/handshakeUser";
 export * from './mutations/createUser';
+export * from './mutations/setupProperty'

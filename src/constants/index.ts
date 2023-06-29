@@ -74,7 +74,7 @@ export const defaultPropertyType: PropertyTypeForm = {
 
 export const defaultContactPerson: ContactPersonForm = {
   contactPerson: undefined,
-  shootDate: undefined,
+  shootDate: new Date(),
 };
 
-export const PrivateRoutes = ["/landlord/setup", "/onboarding/user"];
+export const PrivateRoutes = ["/landlord/setup", "/onboarding/user", "/success"];

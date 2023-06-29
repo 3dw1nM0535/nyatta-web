@@ -15,7 +15,7 @@ export const authOptions = (): AuthOptions => {
       if (session) {
         try {
           const res = await fetch(
-            `http://localhost:4000/handshake`,
+            `${process.env.NEXT_PUBLIC_API}/handshake`,
             {
               method: "POST",
               headers: {
@@ -32,12 +32,19 @@ export const authOptions = (): AuthOptions => {
           const data = await res.json()
           session.onboarding = data.access_token
         } catch (err) {
-          console.log(err)
+          console.error(err)
         }
       } else {
         return session
       }
       return session
+    },
+    
+    async redirect({ url, baseUrl }: any) {
+      if (url.includes('/login/user')) {
+        return baseUrl
+      }
+      return url
     },
   }
   return { providers, callbacks }

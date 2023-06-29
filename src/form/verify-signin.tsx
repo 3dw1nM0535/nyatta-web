@@ -22,7 +22,7 @@ import { VerifySignInSchema } from "form/validations";
 
 const VerifySignInForm = (): JSX.Element => {
   const router = useRouter()
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_CODE);
   const [updateUser, { loading: creatingUser }] = useMutation(UPDATE_USER);
   const { setStatus, signInForm } = useSignIn();
@@ -61,7 +61,8 @@ const VerifySignInForm = (): JSX.Element => {
                 },
               },
               onCompleted: () => {
-                router.push('/')
+                // update session
+                update()
               },
             })
           }

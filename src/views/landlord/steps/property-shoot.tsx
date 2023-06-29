@@ -17,6 +17,8 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
@@ -27,6 +29,8 @@ import { type ContactPersonForm } from "@types";
 import { ContactPersonSchema } from "form/validations";
 
 const Shoot = (): JSX.Element => {
+  const { data: session } = useSession()
+  const router = useRouter()
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
   const [setupProperty, { loading: settingupProperty }] = useMutation(SETUP_PROPERTY)
   const { setStep, descriptionForm, locationForm, propertyType, unitsForm, caretakerForm, contactPersonForm, setContactPersonForm } =
@@ -102,14 +106,22 @@ const Shoot = (): JSX.Element => {
             }, []),
             shoot: {
               date: new Date(data.shootDate).toISOString(),
+              contactPerson: data.contactPerson,
             },
+            creator: session?.user?.email,
         }
-        await setupProperty({
-          variables: {
-            input,
-          },
-          onCompleted: data => console.log(data),
-        })
+        if (!settingupProperty) {
+          await setupProperty({
+            variables: {
+              input,
+            },
+            onCompleted: data => {
+              if (data.setupProperty.success === 'okay') {
+                router.push('/success')
+              }
+            }
+          })
+        }
   };
 
   return (

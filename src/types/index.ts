@@ -14,6 +14,7 @@ export type OnboardingStep =
   | "caretaker"
   | "units"
   | "shoot"
+  | "submitted"
   | "type";
 
 export interface LocationOption {

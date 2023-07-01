@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
       )}
       <Box p={4}>{children}</Box>
       {pathname !== '/login/user' && (
-        <Box bottom="5" left="0" w="100%" textAlign="center" position="fixed">
+        <Box bottom="0" h={10} bg="white" left="0" w="100%" textAlign="center" position="fixed">
           <Text
             as="a"
             href="mailto:edwinmoses535@gmail.com"

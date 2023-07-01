@@ -23,16 +23,18 @@ export const FormSteps: OnboardingStep[] = [
   "caretaker",
   "units",
   "shoot",
+  "submitted",
 ];
 
 export const FormStepTitle: Record<OnboardingStep, string> = {
   description: "How can you name this property?",
   location: "Describe your property by locality.",
   caretaker:
-    "We will schedule a professional shoot for your property so there has to be someone who will give us access to your property and guide us through the property. Additionally, this will be the immediate and authenticated goto person for any queries from users when your listing goes live.",
+    "Schedule a shoot with us for your property. This person will give our photoman access and guide him/her through the property.",
   units: "You've come this far! How best can you describe your units?",
   type: "How best can you define your property?",
   shoot: "Schedule a professional shoot.",
+  submitted: "You're all set🎉!",
 };
 
 export const defaultDescriptionForm: DescriptionForm = {

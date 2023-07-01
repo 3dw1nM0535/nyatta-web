@@ -11,20 +11,18 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { verifyVerificationCode as VERIFY_CODE, UPDATE_USER } from "@gql";
+import { verifyVerificationCode as VERIFY_CODE, ONBOARD_USER } from "@gql";
 import { useSignIn } from "@hooks";
 import { Session, VerifySignInForm } from "@types";
 import { VerifySignInSchema } from "form/validations";
 
 const VerifySignInForm = (): JSX.Element => {
-  const router = useRouter()
   const { data: session, update } = useSession();
   const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_CODE);
-  const [updateUser, { loading: creatingUser }] = useMutation(UPDATE_USER);
+  const [onboardUser, { loading: creatingUser }] = useMutation(ONBOARD_USER);
   const { setStatus, signInForm } = useSignIn();
   const {
     handleSubmit,
@@ -40,6 +38,7 @@ const VerifySignInForm = (): JSX.Element => {
         variables: {
           input: {
             phone: `${signInForm?.countryCode}${signInForm?.phone}`,
+            email: session?.user?.email,
             countryCode: "KE",
             verifyCode: data.code,
           },
@@ -49,15 +48,11 @@ const VerifySignInForm = (): JSX.Element => {
           if (data.verifyVerificationCode.success === "pending") {
             setStatus("pending");
           } else if (((session as unknown) as Session)?.onboarding === "true") {
-            await updateUser({
+            await onboardUser({
               variables: {
                 input: {
-                  first_name: session?.user?.name?.split(" ")[0],
-                  last_name: session?.user?.name?.split(" ")[1],
                   email: session?.user?.email,
-                  avatar: session?.user?.image,
                   onboarding: false,
-                  phone: `${signInForm?.countryCode}${signInForm?.phone}`,
                 },
               },
               onCompleted: () => {

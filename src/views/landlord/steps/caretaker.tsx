@@ -24,17 +24,18 @@ import { useDropzone } from "react-dropzone";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 
-import { CaretakerSchema } from "../../../form/validations";
 import { VerificationModal } from "../components";
 
 import {
   uploadImage as UPLOAD_IMAGE,
   sendVerificationCode as SEND_VERIFICATION_CODE,
 } from "@gql";
-import { usePropertyOnboarding } from "@hooks";
+import { usePropertyOnboarding, useAppContext } from "@hooks";
 import { type CaretakerForm } from "@types";
+import { CaretakerSchema } from "form/validations";
 
 const Caretaker = (): JSX.Element => {
+  const { phone } = useAppContext()
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
   const [sendVerification, { loading: sendingVerification }] = useMutation(
     SEND_VERIFICATION_CODE
@@ -80,7 +81,7 @@ const Caretaker = (): JSX.Element => {
   const onSubmit: SubmitHandler<CaretakerForm> = async (data) => {
     setCaretakerForm(data);
     // Send verification code to phone
-    if (!caretakerVerified || data.phoneNumber != caretakerForm.phoneNumber) {
+    if (!caretakerVerified || data.phoneNumber !== caretakerForm.phoneNumber || phone !== caretakerForm.phoneNumber) {
       await sendVerification({
         variables: {
           input: {

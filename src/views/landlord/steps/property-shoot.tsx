@@ -117,7 +117,7 @@ const Shoot = (): JSX.Element => {
             },
             onCompleted: data => {
               if (data.setupProperty.success === 'okay') {
-                router.push('/success')
+                setStep('submitted')
               }
             }
           })

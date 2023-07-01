@@ -2,6 +2,7 @@
 export * from "./queries/getListings";
 export * from "./queries/getTowns";
 export * from "./queries/hello";
+export * from './queries/getUser'
 // Mutations
 export * from "./mutations/uploadFile";
 export * from "./mutations/sendVerificationCode";
@@ -10,3 +11,4 @@ export * from "./mutations/updateUser";
 export * from "./mutations/handshakeUser";
 export * from './mutations/createUser';
 export * from './mutations/setupProperty'
+export * from './mutations/onboardUser'

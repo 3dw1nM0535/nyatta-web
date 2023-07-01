@@ -7,6 +7,7 @@ import UserMenu from "./user-profile";
 const Header = ({ onOpen }: any): JSX.Element => (
   <Flex
     position="sticky"
+    bg="white"
     px={4}
     top="0"
     h={20}

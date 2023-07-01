@@ -8,7 +8,7 @@ const Title = () => {
 
   return (
     <Box>
-      <Text>
+      <Text fontWeight="bold" fontSize={{base:"2xl", md:"3xl"}}>
         {FormStepTitle[step]}{" "}
         {step === "units" && unitsCount > 0 && <span>({unitsCount})</span>}
       </Text>

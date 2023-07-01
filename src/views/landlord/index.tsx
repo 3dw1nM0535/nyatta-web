@@ -11,6 +11,7 @@ import {
   Caretaker,
   PropertyType,
   Shoot,
+  AllSet,
 } from "./steps";
 
 import { usePropertyOnboarding } from "@hooks";
@@ -19,7 +20,7 @@ const Landlord = () => {
   const { step } = usePropertyOnboarding();
 
   return (
-    <Container>
+    <Container mb={20}>
       <Head>
         <title>Manage your properties in one place</title>
       </Head>
@@ -32,6 +33,7 @@ const Landlord = () => {
       {step === "caretaker" && <Caretaker />}
       {step === "type" && <PropertyType />}
       {step === "shoot" && <Shoot />}
+      {step === 'submitted' && <AllSet />}
     </Container>
   );
 };

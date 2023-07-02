@@ -27,7 +27,7 @@ export const FormSteps: OnboardingStep[] = [
 ];
 
 export const FormStepTitle: Record<OnboardingStep, string> = {
-  description: "How can you name this property?",
+  description: "Property name",
   location: "Describe your property by locality.",
   caretaker:
     "Schedule a shoot with us for your property. This person will give our photoman access and guide him/her through the property.",

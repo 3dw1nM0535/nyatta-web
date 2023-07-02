@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Analytics } from '@vercel/analytics/react'
 import { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 
@@ -27,6 +28,7 @@ const AppLayout = ({ children }: Props) => (
       <Providers>
         <AppProvider>
           <Layout>{children}</Layout>
+          {process.env.NEXT_PUBLIC_ENV === 'production' && <Analytics />}
         </AppProvider>
       </Providers>
     </body>

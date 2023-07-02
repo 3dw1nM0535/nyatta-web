@@ -95,7 +95,7 @@ export interface PropertyTypeForm {
 
 export interface ContactPersonForm {
   contactPerson: string | undefined;
-  shootDate: Date
+  shootDate: Date | string | number;
 }
 
 export interface UserOnboardingForm {

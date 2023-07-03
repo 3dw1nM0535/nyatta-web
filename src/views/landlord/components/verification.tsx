@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
-import { verifyVerificationCode as VERIFY_VERIFICATION_CODE } from "@gql";
+import { VERIFY_CARETAKER } from "@gql";
 import { usePropertyOnboarding } from "@hooks";
 
 interface FormValues {
@@ -34,9 +34,9 @@ const VerificationModal = ({ isOpen, onClose }: Props): JSX.Element => {
     formState: { errors },
   } = useForm<FormValues>();
   const [verifyCode, { loading: verifyingCode }] = useMutation(
-    VERIFY_VERIFICATION_CODE
+    VERIFY_CARETAKER
   );
-  const { setStep, caretakerForm, setCaretakerVerified } =
+  const { setStep, caretakerForm } =
     usePropertyOnboarding();
 
   // Verify phone
@@ -51,9 +51,8 @@ const VerificationModal = ({ isOpen, onClose }: Props): JSX.Element => {
       },
       // Proceed next step if successfull
       onCompleted: (data) => {
-        const status = data?.verifyVerificationCode.success;
+        const status = data?.verifyCaretakerVerificationCode.success;
         if (status === "approved") {
-          setCaretakerVerified(true);
           setStep("units");
         }
       },

@@ -6,7 +6,8 @@ export * from './queries/getUser'
 // Mutations
 export * from "./mutations/uploadFile";
 export * from "./mutations/sendVerificationCode";
-export * from "./mutations/verifyVerificationCode";
+export * from "./mutations/verifyUserVerificationCode";
+export * from './mutations/verifyCaretakerVerification'
 export * from "./mutations/updateUser";
 export * from "./mutations/handshakeUser";
 export * from './mutations/createUser';

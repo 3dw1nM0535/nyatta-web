@@ -6,7 +6,7 @@ import { MdOutlineExplore} from 'react-icons/md'
 
 const linkItems = [
   {label: "Listings", href: '/listings', icon: MdOutlineExplore},
-  {label: "Property Owner", href: '/landlord/setup', icon: FaHome},
+  {label: "Property Owner", href: '/property/setup', icon: FaHome},
 ]
 
 const Sidebar = ({ onClose, ...rest }: any): JSX.Element => {

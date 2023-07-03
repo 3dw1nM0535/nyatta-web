@@ -6,5 +6,5 @@ export const metadata: Metadata = {
   title: "Nyatta - Setup your property for discoverability and management",
 };
 
-// `/landlord/setup`
+// `/property/setup`
 export default Landlord;

@@ -23,7 +23,7 @@ const Header = ({ onOpen }: any): JSX.Element => (
       </Text>
       <Flex gap={4} cursor="pointer" mx={8}>
         <Link href="/listings">Listings</Link>
-        <Link href="/landlord/setup">Property Owner</Link>
+        <Link href="/property/setup">Property Owner</Link>
       </Flex>
     </Flex>
     <IconButton

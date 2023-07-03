@@ -44,7 +44,7 @@ export const OnboardingProvider = ({ children }: PropsWithChildren) => {
     useState<PropertyTypeForm>(defaultPropertyType);
   const [contactPersonForm, setContactPersonForm] =
     useState<ContactPersonForm>(defaultContactPerson);
-  const [step, setStep] = useState<OnboardingStep>("description");
+  const [step, setStep] = useState<OnboardingStep>("submitted");
   // For default towns select input
   const { data } = useQuery(GET_TOWNS);
   const locations = data?.getTowns.map((item: any) => ({

@@ -1,13 +1,19 @@
-import { Box } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Box, Text } from '@chakra-ui/react'
 
-const AllSet = (): JSX.Element => (
+import { usePropertyOnboarding } from 'hooks'
+
+const AllSet = (): JSX.Element => {
+  const { setStep } = usePropertyOnboarding()
+
+  return (
   <Box>
-    Congratulations! We have received your listing. Setup more {' '}
+    Congratulations! We have received your listing. Setup{' '}
     <Box as="span">
-      <Link href="/landlord/setup">property</Link>
-    </Box>
+      <Text as="span" textDecoration="underline" color="blue.500" cursor="pointer" onClick={() => setStep('description')}>more</Text>
+    </Box>{' '}
+    property.
   </Box>
 )
+}
 
 export default AllSet

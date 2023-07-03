@@ -14,14 +14,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { verifyVerificationCode as VERIFY_CODE, ONBOARD_USER } from "@gql";
+import { verifyUserVerificationCode as VERIFY_USER_CODE, ONBOARD_USER } from "@gql";
 import { useSignIn } from "@hooks";
 import { Session, VerifySignInForm } from "@types";
 import { VerifySignInSchema } from "form/validations";
 
 const VerifySignInForm = (): JSX.Element => {
   const { data: session, update } = useSession();
-  const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_CODE);
+  const [verifyCode, { loading: verifyingCode }] = useMutation(VERIFY_USER_CODE);
   const [onboardUser, { loading: creatingUser }] = useMutation(ONBOARD_USER);
   const { setStatus, signInForm } = useSignIn();
   const {
@@ -45,7 +45,7 @@ const VerifySignInForm = (): JSX.Element => {
         },
         onCompleted: async (data) => {
           // TODO trigger error with invalid code
-          if (data.verifyVerificationCode.success === "pending") {
+          if (data.verifyUserVerificationCode.success === "pending") {
             setStatus("pending");
           } else if (((session as unknown) as Session)?.onboarding === "true") {
             await onboardUser({

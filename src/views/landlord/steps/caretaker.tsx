@@ -41,7 +41,7 @@ const Caretaker = (): JSX.Element => {
     SEND_VERIFICATION_CODE
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setStep, caretakerForm, setCaretakerForm, caretakerVerified } =
+  const { setStep, caretakerForm, setCaretakerForm, caretakerVerified, setCaretakerVerified } =
     usePropertyOnboarding();
   const {
     register,
@@ -80,8 +80,9 @@ const Caretaker = (): JSX.Element => {
   // Start caretaker verification flow
   const onSubmit: SubmitHandler<CaretakerForm> = async (data) => {
     setCaretakerForm(data);
+    setCaretakerVerified(true);
     // Send verification code to phone
-    if (!caretakerVerified || data.phoneNumber !== caretakerForm.phoneNumber || phone !== caretakerForm.phoneNumber) {
+    if (data.phoneNumber !== caretakerForm.phoneNumber || phone !== `${data.countryCode}${data.phoneNumber}`) {
       await sendVerification({
         variables: {
           input: {

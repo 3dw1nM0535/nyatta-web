@@ -29,8 +29,7 @@ const Mailing = (): JSX.Element => {
               {errors?.email?.message}
             </FormErrorMessage>
           )}
-          <FormHelperText>{`You'll be updated about new features`}</FormHelperText>
-          <FormHelperText>{`We'll never share your email`}</FormHelperText>
+          <FormHelperText>{`Get updates about new features.`}</FormHelperText>
         </FormControl>
         <Button mt={5} type="submit">Submit</Button>
       </Container>

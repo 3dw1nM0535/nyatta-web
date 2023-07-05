@@ -18,12 +18,12 @@ const Header = ({ onOpen }: any): JSX.Element => (
     justifyContent={{ base: "space-between", md: "flex-start" }}
   >
     <Flex display={{ base: "none", md: "flex" }} alignItems="center">
-      <Text fontSize="4xl" fontWeight="bold">
+      <Text color="green.800" fontSize="4xl" fontWeight="bold">
         Nyatta
       </Text>
       <Flex gap={4} cursor="pointer" mx={8}>
-        <Link href="/listings">Listings</Link>
-        <Link href="/property/setup">Property Owner</Link>
+        <Text textDecoration="underline" color="green.800" as={Link} href="/listings">Listings</Text>
+        <Text textDecoration="underline" color="green.800" as={Link} href="/property/setup">Property Owner</Text>
       </Flex>
     </Flex>
     <IconButton

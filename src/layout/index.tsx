@@ -30,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
           >
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader>Nyatta</DrawerHeader>
+              <DrawerHeader color="green.800">Nyatta</DrawerHeader>
               <Sidebar onClose={onClose} />
             </DrawerContent>
           </Drawer>
@@ -41,6 +41,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Box bottom="0" h={10} bg="white" left="0" w="100%" textAlign="center" position="fixed">
           <Text
             as="a"
+            color="green.800"
             href="mailto:edwinmoses535@gmail.com"
             _hover={{
               cursor: "pointer",

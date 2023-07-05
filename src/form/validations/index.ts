@@ -127,3 +127,7 @@ export const UserOnboardingSchema = object().shape({
       excludeEmptyString: true,
     }),
 });
+
+export const MailingSchema = object().shape({
+  email: string().required("Email required").email("Enter valid email"),
+})

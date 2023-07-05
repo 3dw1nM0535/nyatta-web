@@ -120,3 +120,7 @@ export interface Session {
   expires: Date,
   onboarding: string
 }
+
+export interface MailingForm {
+  email: string;
+}

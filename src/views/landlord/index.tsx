@@ -1,7 +1,6 @@
 "use client";
 
 import { Container, HStack } from "@chakra-ui/react";
-import Head from "next/head";
 
 import { Title } from "./components";
 import {
@@ -21,9 +20,6 @@ const Landlord = () => {
 
   return (
     <Container mb={20}>
-      <Head>
-        <title>Manage your properties in one place</title>
-      </Head>
       <HStack my={{ base: 4, md: 6 }}>
         <Title />
       </HStack>

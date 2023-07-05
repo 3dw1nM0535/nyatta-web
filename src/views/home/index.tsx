@@ -1,14 +1,10 @@
 "use client";
 
 import { AbsoluteCenter, Container, Text } from "@chakra-ui/react";
-import Head from "next/head";
 import { TypeAnimation } from 'react-type-animation'
 
 const Home = () => (
   <>
-    <Head>
-      <title>Nyatta - Find homes or apartments for rent.</title>
-    </Head>
     <Container maxW="full">
       <AbsoluteCenter w="100%">
         <Text fontSize={{ base: "5xl", md: "7xl" }} textAlign="center">

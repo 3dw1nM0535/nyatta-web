@@ -4,7 +4,7 @@
 
 import * as Sentry from "@sentry/nextjs";
 
-const initSentry = () => process.env.NEXT_PUBLIC_ENV === 'production'
+const initSentry = () => process.env.NEXT_PUBLIC_ENV === 'production' || process.env.NEXT_PUBLIC_ENV === 'staging'
 
 if (initSentry()) {
   Sentry.init({

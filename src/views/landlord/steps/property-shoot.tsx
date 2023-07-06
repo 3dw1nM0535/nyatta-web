@@ -17,20 +17,18 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 
 import { uploadImage as UPLOAD_IMAGE, SETUP_PROPERTY } from "@gql";
-import { usePropertyOnboarding } from "@hooks";
+import { usePropertyOnboarding, useTrackers } from "@hooks";
 import { type ContactPersonForm } from "@types";
 import { ContactPersonSchema } from "form/validations";
 
 const Shoot = (): JSX.Element => {
   const { data: session } = useSession()
-  const router = useRouter()
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
   const [setupProperty, { loading: settingupProperty }] = useMutation(SETUP_PROPERTY)
   const { setStep, descriptionForm, locationForm, propertyType, unitsForm, caretakerForm, contactPersonForm, setContactPersonForm } =
@@ -46,6 +44,7 @@ const Shoot = (): JSX.Element => {
     defaultValues: contactPersonForm,
     resolver: yupResolver(ContactPersonSchema),
   });
+  const { trackAction } = useTrackers()
 
   const handleDrop = async (acceptedFiles: File[]) => {
     await uploadImage({
@@ -71,57 +70,60 @@ const Shoot = (): JSX.Element => {
   });
 
   const goBack = () => setStep("units");
+
+  // Save property to database
   const onSubmit: SubmitHandler<ContactPersonForm> = async (data) => {
+    trackAction('setup-property')
     setContactPersonForm(data);
     const input = {
-          name: descriptionForm.name,
-          town: locationForm?.town?.label,
-          postalCode: locationForm.postalCode,
-          propertyType: propertyType.propertyType,
-          caretaker: {
-            first_name: caretakerForm.firstName,
-            last_name: caretakerForm.lastName,
-            idVerification: caretakerForm.idVerification,
-            countryCode: "KE",
-            phone: `${caretakerForm.countryCode}${caretakerForm.phoneNumber}`,
-          },
-          units: unitsForm.units.reduce((acc, unit) => {
-              const amenities = unit.amenities.map(amenity => ({
-                name: amenity.label,
-                category: amenity.category,
-              }))
-              const runningObj = {
-                name: unit.name,
-                type: unit.type,
-                baths: unit.baths,
-                price: String(unit.price),
-                bedrooms: unit.bedrooms.map(item => ({
-                  ...item,
-                  enSuite: item.enSuite === 'yes' ? true : false,
-                  master: item.master === 'yes' ? true : false,
-                })),
-                amenities: amenities,
-              }
-              return acc.concat(runningObj as any)
-            }, []),
-            shoot: {
-              date: new Date(data.shootDate).toISOString(),
-              contactPerson: data.contactPerson,
-            },
-            creator: session?.user?.email,
+      name: descriptionForm.name,
+      town: locationForm?.town?.label,
+      postalCode: locationForm.postalCode,
+      propertyType: propertyType.propertyType,
+      caretaker: {
+        first_name: caretakerForm.firstName,
+        last_name: caretakerForm.lastName,
+        idVerification: caretakerForm.idVerification,
+        countryCode: "KE",
+        phone: `${caretakerForm.countryCode}${caretakerForm.phoneNumber}`,
+      },
+      units: unitsForm.units.reduce((acc, unit) => {
+          const amenities = unit.amenities.map(amenity => ({
+            name: amenity.label,
+            category: amenity.category,
+          }))
+          const runningObj = {
+            name: unit.name,
+            type: unit.type,
+            baths: unit.baths,
+            price: String(unit.price),
+            bedrooms: unit.bedrooms.map(item => ({
+              ...item,
+              enSuite: item.enSuite === 'yes' ? true : false,
+              master: item.master === 'yes' ? true : false,
+            })),
+            amenities: amenities,
+          }
+          return acc.concat(runningObj as any)
+        }, []),
+        shoot: {
+          date: new Date(data.shootDate).toISOString(),
+          contactPerson: data.contactPerson,
+        },
+        creator: session?.user?.email,
+    }
+    if (!settingupProperty) {
+      await setupProperty({
+        variables: {
+          input,
+        },
+        onCompleted: data => {
+          if (data.setupProperty.success === 'okay') {
+            setStep('submitted')
+          }
         }
-        if (!settingupProperty) {
-          await setupProperty({
-            variables: {
-              input,
-            },
-            onCompleted: data => {
-              if (data.setupProperty.success === 'okay') {
-                setStep('submitted')
-              }
-            }
-          })
-        }
+      })
+    }
   };
 
   return (

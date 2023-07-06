@@ -9,21 +9,34 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Spinner,
 } from "@chakra-ui/react";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { FaAngleDown } from "react-icons/fa";
 
+import { useTrackers } from 'hooks'
+
 const UserMenu = ({ ...rest }): JSX.Element => {
   const { data: session, status } = useSession();
+  const { trackAction } = useTrackers()
+
+  const handleSignIn = () => {
+    trackAction('sign-in')
+    signIn("google")
+  }
+
+  const handleSignOut = () => {
+    trackAction('sign-out')
+    signOut()
+  }
+
+  const isAuthed = status === 'authenticated'
 
   return (
     <HStack spacing={4} {...rest}>
-      {status === "loading" && <Spinner />}
-      {status !== "loading" && status !== "authenticated" && (
-        <Button onClick={() => signIn("google")}>Sign In</Button>
+      {!isAuthed && (
+        <Button onClick={handleSignIn}>Sign In</Button>
       )}
-      {status !== "loading" && status === "authenticated" && (
+      {isAuthed && (
         <Flex>
           <Menu>
             <MenuButton>
@@ -36,7 +49,7 @@ const UserMenu = ({ ...rest }): JSX.Element => {
             </MenuButton>
             <MenuList>
               <MenuItem>{session?.user?.email}</MenuItem>
-              <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

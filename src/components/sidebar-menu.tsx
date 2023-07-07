@@ -2,10 +2,8 @@ import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FaHome } from 'react-icons/fa'
-import { MdOutlineExplore} from 'react-icons/md'
 
 const linkItems = [
-  {label: "Listings", href: '/listings', icon: MdOutlineExplore},
   {label: "Property Owner", href: '/property/setup', icon: FaHome},
 ]
 

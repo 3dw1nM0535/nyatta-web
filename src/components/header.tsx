@@ -22,7 +22,6 @@ const Header = ({ onOpen }: any): JSX.Element => (
         Nyatta
       </Text>
       <Flex gap={4} cursor="pointer" mx={8}>
-        <Text textDecoration="underline" color="green.800" as={Link} href="/listings">Listings</Text>
         <Text textDecoration="underline" color="green.800" as={Link} href="/property/setup">Property Owner</Text>
       </Flex>
     </Flex>

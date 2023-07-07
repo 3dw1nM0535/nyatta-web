@@ -1,33 +1,33 @@
 "use client";
 
-import { AbsoluteCenter, Box, Flex, Text, VStack } from "@chakra-ui/react";
-import Link from "next/link";
+import { useQuery } from '@apollo/client';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 
-import SearchForm from "form/search-listings";
+import NoListings from './components/NoListings';
 
-const Listings = () => (
-  <Flex flexDirection="column">
-    <Box>
-      <SearchForm />
-    </Box>
-    <AbsoluteCenter display="flex" justifyContent="center" w="100%">
-      <VStack spacing={{base: 4, md: 6}}>
-        <Box>
-          <Text fontSize={{base: "3xl", md: "4xl"}}>No Listings Found</Text>
-        </Box>
-        <Box textAlign="center">
-          <Text>
-            We are now receiving <Text color="green.800" textDecoration="underline" as={Link} href="/property/setup">new</Text> listings!
-          </Text>
-        </Box>
-        <Box>
-<Text>
-            Want to receive updates? Register <Text color="green.800" textDecoration="underline" as={Link} href="/mailing">here</Text>
-          </Text>
-        </Box>
-      </VStack>
-    </AbsoluteCenter>
-  </Flex>
-);
+import { GET_USER_PROPERTIES } from '@gql'; 
+
+const Listings = () => {
+  const { data: session, status } = useSession()
+  const { data, loading } = useQuery(GET_USER_PROPERTIES, {
+    variables: {
+      email: session?.user?.email,
+    },
+    skip: status === 'unauthenticated' || status === 'loading',
+  })
+
+  return (
+    <Flex>
+      {loading && (
+        <Flex w="100%" justifyContent="center">
+          <Spinner boxSize="3em" color="green.800" thickness="10px" />
+        </Flex>
+      )}
+      {!loading && data?.getUser?.properties?.length === 0 && <NoListings />}
+      {!loading && data?.getUser?.properties?.length > 0 && <Box>listings</Box>}
+    </Flex>
+  )
+}
 
 export default Listings;

@@ -9,6 +9,7 @@ export const GET_USER_PROPERTIES = gql`
         name
         town
         type
+        status
       }
     }
   }

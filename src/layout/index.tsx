@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { Box, Text, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, useDisclosure } from "@chakra-ui/react";
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import Header from "components/header";
@@ -30,7 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
           >
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader color="green.800">Nyatta</DrawerHeader>
+              <DrawerHeader onClick={() => setTimeout(onClose, 300)} as={Link} href="/" color="green.800">Nyatta</DrawerHeader>
               <Sidebar onClose={onClose} />
             </DrawerContent>
           </Drawer>

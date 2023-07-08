@@ -18,7 +18,7 @@ const Header = ({ onOpen }: any): JSX.Element => (
     justifyContent={{ base: "space-between", md: "flex-start" }}
   >
     <Flex display={{ base: "none", md: "flex" }} alignItems="center">
-      <Text color="green.800" fontSize="4xl" fontWeight="bold">
+      <Text as={Link} href="/" cursor="pointer" color="green.800" fontSize="4xl" fontWeight="bold">
         Nyatta
       </Text>
       <Flex gap={4} cursor="pointer" mx={8}>

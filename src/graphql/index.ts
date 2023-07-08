@@ -3,6 +3,7 @@ export * from "./queries/getListings";
 export * from "./queries/getTowns";
 export * from "./queries/hello";
 export * from './queries/getUser'
+export * from './queries/getUserProperties'
 // Mutations
 export * from "./mutations/uploadFile";
 export * from "./mutations/sendVerificationCode";

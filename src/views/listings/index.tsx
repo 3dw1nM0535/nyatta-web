@@ -31,7 +31,7 @@ const Listings = () => {
           <Spinner boxSize="3em" color="green.800" thickness="10px" />
         </Flex>
       )}
-      {!loading && data?.getUser?.properties?.length === 0 && <NoListings />}
+      {!loading && data?.getUser.properties.length === 0 && <NoListings />}
       <SimpleGrid mb={20} spacing={4} columns={[1, null, 4]}>
       {!loading && data?.getUser.properties.length > 0 && data?.getUser.properties.map((item: any) => (
         <Box

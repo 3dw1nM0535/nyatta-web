@@ -43,7 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
           <Text
             as="a"
             color="green.800"
-            href="mailto:edwinmoses535@gmail.com"
+            href="mailto:lomolo@nyatta.app"
             _hover={{
               cursor: "pointer",
             }}

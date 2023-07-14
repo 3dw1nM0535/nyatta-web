@@ -1,8 +1,6 @@
 import {
-  Box,
   Button,
   HStack,
-  Icon,
   Flex,
   Avatar,
   Menu,
@@ -11,7 +9,6 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { FaAngleDown } from "react-icons/fa";
 
 import { useTrackers } from 'hooks'
 
@@ -42,9 +39,6 @@ const UserMenu = ({ ...rest }): JSX.Element => {
             <MenuButton>
               <HStack>
                 <Avatar src={`${session?.user?.image}`} loading="eager" />
-                <Box display={{ base: "none", md: "flex" }}>
-                  <Icon as={FaAngleDown} />
-                </Box>
               </HStack>
             </MenuButton>
             <MenuList>

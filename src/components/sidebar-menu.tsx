@@ -20,7 +20,7 @@ const Sidebar = ({ onClose, ...rest }: any): JSX.Element => {
       {...rest}
     >
       {linkItems.map((item, index) => (
-        <Link onClick={() => setTimeout(onClose, 300)} key={index} href={`${item.href}`}>
+        <Link onClick={onClose} key={index} href={`${item.href}`}>
           <Flex
             align="center"
             p={4}

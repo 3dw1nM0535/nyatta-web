@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 
 import ApolloProvider from './apollo-client'
@@ -20,12 +19,6 @@ interface Props {
 
 const Providers = ({ children }: Props) => (
     <>
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-        />
-      </Head>
       <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
         <ApolloProvider>
           <CacheProvider>

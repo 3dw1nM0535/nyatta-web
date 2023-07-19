@@ -82,7 +82,7 @@ const Caretaker = (): JSX.Element => {
     setCaretakerForm(data);
     setCaretakerVerified(true);
     // Send verification code to phone
-    if (data.phoneNumber !== caretakerForm.phoneNumber || phone !== `${data.countryCode}${data.phoneNumber}`) {
+    if (phone !== `${data.countryCode}${data.phoneNumber}`) {
       await sendVerification({
         variables: {
           input: {

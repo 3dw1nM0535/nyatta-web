@@ -21,12 +21,12 @@ const AppProvider = ({ children }: Props) => {
   });
 
   if (status === "loading" || userLoading) {
-      return (
-        <Center>
-          <Spinner thickness="8px" color="green.700" size="xl" />
-        </Center>
-      );
-    }
+    return (
+      <Center>
+        <Spinner thickness="8px" color="green.700" size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <AppContext.Provider

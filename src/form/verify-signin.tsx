@@ -47,7 +47,7 @@ const VerifySignInForm = (): JSX.Element => {
           // TODO trigger error with invalid code
           if (data.verifyUserVerificationCode.success === "pending") {
             setStatus("pending");
-          } else if (((session as unknown) as Session)?.onboarding === "true") {
+          } else if (((session as unknown) as Session)?.onboarding) {
             await onboardUser({
               variables: {
                 input: {

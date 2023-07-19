@@ -30,9 +30,11 @@ const ProtectedPage = ({ children }: Props) => {
 
     if (!isAuthenticated) {
       router.push('/login/user')
-    } else if (isAuthenticated && ((session as unknown) as Session).onboarding === 'true') {
-      router.push('/onboarding/user')
     }
+  }
+
+  if (isAuthenticated && ((session as unknown) as Session).onboarding) {
+    router.push('/onboarding/user')
   }
 
   return <>{children}</>

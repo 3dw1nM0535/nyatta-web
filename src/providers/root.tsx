@@ -28,15 +28,15 @@ const Providers = ({ children }: Props) => (
       </Head>
       <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
         <ApolloProvider>
-              <CacheProvider>
-                <ChakraProvider theme={theme}>
-                    <SearchListingProvider>
-                      <OnboardingProvider>
-                        <SignInProvider>{children}</SignInProvider>
-                      </OnboardingProvider>
-                    </SearchListingProvider>
-                </ChakraProvider>
-              </CacheProvider>
+          <CacheProvider>
+            <ChakraProvider theme={theme}>
+                <SearchListingProvider>
+                  <OnboardingProvider>
+                    <SignInProvider>{children}</SignInProvider>
+                  </OnboardingProvider>
+                </SearchListingProvider>
+            </ChakraProvider>
+          </CacheProvider>
         </ApolloProvider>
       </SessionProvider>
     </>

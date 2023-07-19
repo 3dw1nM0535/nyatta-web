@@ -12,7 +12,6 @@ import VerifySignInForm from "form/verify-signin";
 const Onboarding = (): JSX.Element => {
   const { data: session } = useSession()
   const { status } = useSignIn();
-
   const onboarding = ((session as unknown) as Session)?.onboarding
 
   return (

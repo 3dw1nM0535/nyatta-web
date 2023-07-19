@@ -22,6 +22,7 @@
       "@apollo": ["apollo/index.ts"],
       "@hooks": ["hooks/index.tsx"],
       "@context": ["contexts/*"],
+      "@ga/analytics": ["ga/index.ts"],
       "@types": ["types/index.ts"],
       "@lib": ["lib/*"],
       "@providers": ["providers/*"],

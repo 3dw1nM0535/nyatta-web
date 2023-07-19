@@ -22,6 +22,7 @@ import { useDropzone } from "react-dropzone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 
+import { trackEvent } from "@ga/analytics";
 import { uploadImage as UPLOAD_IMAGE, SETUP_PROPERTY } from "@gql";
 import { usePropertyOnboarding, useTrackers } from "@hooks";
 import { type ContactPersonForm } from "@types";
@@ -73,7 +74,6 @@ const Shoot = (): JSX.Element => {
 
   // Save property to database
   const onSubmit: SubmitHandler<ContactPersonForm> = async (data) => {
-    trackAction('setup-property')
     setContactPersonForm(data);
     const input = {
       name: descriptionForm.name,
@@ -119,6 +119,8 @@ const Shoot = (): JSX.Element => {
         },
         onCompleted: data => {
           if (data.setupProperty.success === 'okay') {
+            trackEvent({ action: 'setup-property', category: 'property' })
+            trackAction('setup-property')
             setStep('submitted')
           }
         }

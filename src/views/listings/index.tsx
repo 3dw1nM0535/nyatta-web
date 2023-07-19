@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { useQuery } from '@apollo/client';
 import { Box, Center, Flex, Icon, Image, Spinner, SimpleGrid, Text, Tag } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
@@ -7,6 +9,7 @@ import { MdImageNotSupported } from 'react-icons/md';
 
 import NoListings from './components/NoListings';
 
+import { trackPageView } from '@ga/analytics';
 import { GET_USER_PROPERTIES } from '@gql'; 
 
 const Listings = () => {
@@ -17,6 +20,10 @@ const Listings = () => {
     },
     skip: status === 'unauthenticated' || status === 'loading',
   })
+
+  useEffect(() => {
+    trackPageView({ url: "/listings", title: "Listings" })
+  }, [])
 
   return (
     <Flex

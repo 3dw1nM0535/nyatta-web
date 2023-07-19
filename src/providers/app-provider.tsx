@@ -1,15 +1,12 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 
 import { useQuery } from '@apollo/client';
 import { Center, Spinner } from "@chakra-ui/react";
-import { useRouter, usePathname } from 'next/navigation'
 import { useSession } from "next-auth/react";
 
-import { PrivateRoutes } from "@constants";
 import { GET_USER } from "@gql";
-import { Session } from "@types";
 import { AppContext } from 'contexts/app-context'
 
 interface Props {
@@ -22,18 +19,7 @@ const AppProvider = ({ children }: Props) => {
     variables: { email: session?.user?.email },
     skip: status === 'unauthenticated' || status === 'loading',
   });
-  const router = useRouter()
-  const pathname = usePathname()
 
-  useEffect(() => {
-    if (session && ((session as unknown) as Session).onboarding === 'true') {
-      router.push('/onboarding/user')
-    } else if (!session && PrivateRoutes.includes(pathname)) {
-      router.push('/login/user')
-    }
-  }, [status, pathname, session])
-
-  // wait for auth
   if (status === "loading" || userLoading) {
     return (
       <Center>

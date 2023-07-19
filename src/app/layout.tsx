@@ -6,6 +6,7 @@ import { Space_Grotesk } from "next/font/google";
 
 import Layout from "@layout";
 import AppProvider from "providers/app-provider";
+import ProtectedPage from "providers/protected-page";
 import Providers from "providers/root";
 
 interface Props {
@@ -27,8 +28,10 @@ const AppLayout = ({ children }: Props) => (
     <body>
       <Providers>
         <AppProvider>
-          <Layout>{children}</Layout>
-          {process.env.NEXT_PUBLIC_ENV === 'production' && <Analytics />}
+          <Layout>
+            {process.env.NEXT_PUBLIC_ENV === 'production' && <Analytics />}
+            <ProtectedPage>{children}</ProtectedPage>
+          </Layout>
         </AppProvider>
       </Providers>
     </body>

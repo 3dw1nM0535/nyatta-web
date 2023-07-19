@@ -13,7 +13,7 @@ const Onboarding = (): JSX.Element => {
   const { data: session } = useSession()
   const { status } = useSignIn();
 
-  const onboarding = ((session as unknown) as Session)?.onboarding === 'true'
+  const onboarding = ((session as unknown) as Session)?.onboarding
 
   return (
     <VStack mt={10}>

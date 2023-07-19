@@ -1,6 +1,7 @@
 import { useState, type PropsWithChildren } from "react";
 
 import { useQuery } from "@apollo/client";
+import { useSession } from 'next-auth/react'
 
 import {
   defaultDescriptionForm,
@@ -27,6 +28,7 @@ import {
 import { OnboardingContext } from "contexts/property-onboarding";
 
 export const OnboardingProvider = ({ children }: PropsWithChildren) => {
+  const { status } = useSession()
   const [descriptionForm, setDescriptionForm] = useState<DescriptionForm>(
     defaultDescriptionForm
   );
@@ -46,7 +48,9 @@ export const OnboardingProvider = ({ children }: PropsWithChildren) => {
     useState<ContactPersonForm>(defaultContactPerson);
   const [step, setStep] = useState<OnboardingStep>("description");
   // For default towns select input
-  const { data } = useQuery(GET_TOWNS);
+  const { data } = useQuery(GET_TOWNS, {
+    skip: status === 'unauthenticated' || status === 'loading',
+  });
   const locations = data?.getTowns.map((item: any) => ({
     id: item.id,
     value: item.town.toLowerCase(),

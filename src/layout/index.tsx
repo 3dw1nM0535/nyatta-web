@@ -5,12 +5,22 @@ import type { ReactNode } from "react";
 import { Box, Text, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, useDisclosure } from "@chakra-ui/react";
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import ReactGA from 'react-ga4';
 
 import Header from "components/header";
 import Sidebar from "components/sidebar-menu";
 
 interface LayoutProps {
   children: ReactNode;
+}
+
+if (process.env.NEXT_PUBLIC_ENV === 'production') {
+  ReactGA.initialize(`${process.env.NEXT_PUBLIC_GA_ID}`);
+  ReactGA.event({
+    category: "app-loaded",
+    action: "load-time",
+    value: new Date().getTime(),
+  })
 }
 
 const Layout = ({ children }: LayoutProps) => {

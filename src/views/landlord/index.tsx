@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { Container, HStack } from "@chakra-ui/react";
+
 
 import { Title } from "./components";
 import {
@@ -13,10 +16,15 @@ import {
   AllSet,
 } from "./steps";
 
+import { trackPageView } from '@ga/analytics'
 import { usePropertyOnboarding } from "@hooks";
 
 const Landlord = () => {
   const { step } = usePropertyOnboarding();
+
+  useEffect(() => {
+    trackPageView({ url: "/property/setup", title: "Property Setup" })
+  }, [])
 
   return (
     <Container mb={20}>

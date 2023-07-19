@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useSession, signOut, signIn } from "next-auth/react";
 
+import { trackEvent } from '@ga/analytics'
 import { useTrackers } from 'hooks'
 
 const UserMenu = ({ ...rest }): JSX.Element => {
@@ -17,12 +18,12 @@ const UserMenu = ({ ...rest }): JSX.Element => {
   const { trackAction } = useTrackers()
 
   const handleSignIn = () => {
+    trackEvent({ action: 'sign-in', category: 'user' })
     trackAction('sign-in')
     signIn("google")
   }
 
   const handleSignOut = () => {
-    trackAction('sign-out')
     signOut()
   }
 

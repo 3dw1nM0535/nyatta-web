@@ -1,11 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { AbsoluteCenter, Box, Flex, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 
+import { trackPageView } from '@ga/analytics'
 import SearchForm from "form/search-listings";
 
-const Listings = () => (
+const Listings = () => {
+
+  useEffect(() => {
+    trackPageView({ url: "/", title: "Home" })
+  }, [])
+
+  return (
   <Flex flexDirection="column">
     <Box>
       <SearchForm />
@@ -28,6 +37,7 @@ const Listings = () => (
       </VStack>
     </AbsoluteCenter>
   </Flex>
-);
+)
+};
 
 export default Listings;

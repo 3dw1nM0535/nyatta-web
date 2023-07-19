@@ -5,12 +5,11 @@ import {
   type NormalizedCacheObject,
 } from "@apollo/client";
 import { RetryLink } from "@apollo/client/link/retry";
-import { type CookieValueTypes } from "cookies-next";
 
 import { authLink, errorLink, httpLink } from "./links";
 
 export const createClient = (
-  jwt?: CookieValueTypes
+  jwt?: string
 ): ApolloClient<NormalizedCacheObject> => {
   // Caching
   const cache = new InMemoryCache({});

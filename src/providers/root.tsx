@@ -2,19 +2,12 @@
 
 import { ReactNode } from "react";
 
-import {
-  ApolloProvider,
-  type ApolloClient,
-  type NormalizedCacheObject,
-} from "@apollo/client";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import { getCookie } from "cookies-next";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 
-import { createClient } from "../apollo/createClient";
-
+import ApolloProvider from './apollo-client'
 import { OnboardingProvider } from "./property-onboarding";
 import { SearchListingProvider } from "./search-listings";
 
@@ -25,11 +18,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Providers = ({ children }: Props) => {
-  const jwt = getCookie("jwt");
-  const client = createClient(jwt);
-
-  return (
+const Providers = ({ children }: Props) => (
     <>
       <Head>
         <meta
@@ -37,21 +26,20 @@ const Providers = ({ children }: Props) => {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
       </Head>
-      <ApolloProvider client={client as ApolloClient<NormalizedCacheObject>}>
-        <CacheProvider>
-          <ChakraProvider theme={theme}>
-            <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
-              <SearchListingProvider>
-                <OnboardingProvider>
-                  <SignInProvider>{children}</SignInProvider>
-                </OnboardingProvider>
-              </SearchListingProvider>
-            </SessionProvider>
-          </ChakraProvider>
-        </CacheProvider>
-      </ApolloProvider>
+      <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
+        <ApolloProvider>
+              <CacheProvider>
+                <ChakraProvider theme={theme}>
+                    <SearchListingProvider>
+                      <OnboardingProvider>
+                        <SignInProvider>{children}</SignInProvider>
+                      </OnboardingProvider>
+                    </SearchListingProvider>
+                </ChakraProvider>
+              </CacheProvider>
+        </ApolloProvider>
+      </SessionProvider>
     </>
   );
-};
 
 export default Providers;

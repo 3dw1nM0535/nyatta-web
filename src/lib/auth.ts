@@ -30,7 +30,8 @@ export const authOptions = (): AuthOptions => {
             }
           )
           const data = await res.json()
-          session.onboarding = data.access_token
+          session.onboarding = data.onboarding
+          session.token = data.access_token
         } catch (err) {
           console.error(err)
         }

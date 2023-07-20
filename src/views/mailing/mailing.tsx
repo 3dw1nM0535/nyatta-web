@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { useMutation } from '@apollo/client'
 import { AbsoluteCenter, Button, Container, FormControl, FormLabel, FormHelperText, FormErrorMessage, Input, useToast } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -9,7 +11,7 @@ import { SAVE_MAIL } from '@gql'
 import { MailingSchema } from 'form/validations'
 import { MailingForm } from 'types'
 
-const Mailing = (): JSX.Element => {
+const MailingView: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<MailingForm>({
     resolver: yupResolver(MailingSchema),
   })
@@ -62,4 +64,4 @@ const Mailing = (): JSX.Element => {
 )
 }
 
-export default Mailing
+export default MailingView

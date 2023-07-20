@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useQuery } from '@apollo/client';
 import { Box, Center, Flex, Icon, Image, Spinner, SimpleGrid, Text, Tag } from '@chakra-ui/react';
@@ -12,7 +12,7 @@ import NoListings from './components/NoListings';
 import { trackPageView } from '@ga/analytics';
 import { GET_USER_PROPERTIES } from '@gql'; 
 
-const Listings = () => {
+const ListingsView: React.FC = () => {
   const { data: session, status } = useSession()
   const { data, loading } = useQuery(GET_USER_PROPERTIES, {
     variables: {
@@ -75,4 +75,4 @@ const Listings = () => {
   )
 }
 
-export default Listings;
+export default ListingsView;

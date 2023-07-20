@@ -1,5 +1,7 @@
 "use client";
 
+import React from 'react'
+
 import { Box, Center, Icon, VStack, Text } from "@chakra-ui/react";
 import { useSession } from 'next-auth/react'
 import { FaCheckCircle } from 'react-icons/fa'
@@ -9,7 +11,7 @@ import { Session } from "@types";
 import SignInForm from "form/sign-in";
 import VerifySignInForm from "form/verify-signin";
 
-const Onboarding = (): JSX.Element => {
+const OnboardingView: React.FC = () => {
   const { data: session } = useSession()
   const { status } = useSignIn();
   const onboarding = ((session as unknown) as Session)?.onboarding
@@ -32,4 +34,4 @@ const Onboarding = (): JSX.Element => {
   );
 };
 
-export default Onboarding;
+export default OnboardingView;

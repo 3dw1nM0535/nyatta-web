@@ -13,14 +13,14 @@ export const metadata: Metadata = {
   title: "Nyatta - Find local rental homes",
 };
 
-const ibm = Space_Grotesk({
+const space_grotesk = Space_Grotesk({
   weight: "600",
   subsets: ["latin"],
   display: "swap",
 });
 
 const AppLayout = ({ children }: PropsWithChildren) => (
-  <html lang="en" className={ibm.className}>
+  <html lang="en" className={space_grotesk.className}>
     <body>
       <Providers>
         <AppProvider>

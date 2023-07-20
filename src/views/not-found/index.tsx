@@ -1,11 +1,13 @@
 "use client";
 
+import React from 'react'
+
 import { Heading } from "@chakra-ui/react";
 
-const NotFound = () => (
+const NotFoundView: React.FC = () => (
   <Heading textAlign="center" size="3xl">
     Not found
   </Heading>
 );
 
-export default NotFound;
+export default NotFoundView;

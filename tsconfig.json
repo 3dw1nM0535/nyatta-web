@@ -34,7 +34,7 @@
       "@views": ["views/index.tsx"],
       "@pages": ["pages/*"],
       "@data": ["data/*"],
-      "@layout": ["layout/index.tsx"],
+      "@layout": ["layout/*"],
       "@helpers": ["helpers/index.ts"],
       "@form": ["form/types.ts"],
       "@components": ["components/*"],

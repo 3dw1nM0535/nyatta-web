@@ -20,6 +20,7 @@ const ListingsView: React.FC = () => {
     },
     skip: status === 'unauthenticated' || status === 'loading',
   })
+  const properties = data?.getUser.getProperties || []
 
   useEffect(() => {
     trackPageView({ url: "/listings", title: "Listings" })
@@ -38,9 +39,9 @@ const ListingsView: React.FC = () => {
           <Spinner boxSize="3em" color="green.800" thickness="10px" />
         </Flex>
       )}
-      {!loading && data?.getUser.properties.length === 0 && <NoListings />}
+      {!loading && properties.length === 0 && <NoListings />}
       <SimpleGrid mb={20} spacing={4} columns={[1, null, 4]}>
-      {!loading && data?.getUser.properties.length > 0 && data?.getUser.properties.map((item: any) => (
+      {!loading && properties.length > 0 && properties.map((item: any) => (
         <Box
           _hover={{
             cursor: "pointer",

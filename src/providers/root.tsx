@@ -11,6 +11,7 @@ import { OnboardingProvider } from "./property-onboarding";
 import { SearchListingProvider } from "./search-listings";
 
 import { theme } from "@styles";
+import ListingsProvider from "providers/listings"
 import SignInProvider from "providers/sign-in";
 
 interface Props {
@@ -25,7 +26,11 @@ const Providers = ({ children }: Props) => (
             <ChakraProvider theme={theme}>
                 <SearchListingProvider>
                   <OnboardingProvider>
-                    <SignInProvider>{children}</SignInProvider>
+                    <SignInProvider>
+                      <ListingsProvider>
+                        {children}
+                      </ListingsProvider>
+                    </SignInProvider>
                   </OnboardingProvider>
                 </SearchListingProvider>
             </ChakraProvider>

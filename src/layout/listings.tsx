@@ -2,9 +2,9 @@
 
 import { PropsWithChildren } from 'react'
 
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, useDisclosure, Drawer, DrawerContent } from '@chakra-ui/react'
 
-import NavLink from 'components/nav-link'
+import SidebarDesktop from 'components/sidebar-desktop'
 
 const linkItems = [
   { label: "Overview", href: "/overview" },
@@ -12,20 +12,33 @@ const linkItems = [
   { label: "Tenants", href: "/tenants" },
 ]
 
-const Layout = ({ children }: PropsWithChildren) => (
-  <Box
-    transition="3s ease"
-  >
-    <Flex
-      justifyContent="center"
-      mb={5}
-    >
-      {linkItems.map((link, index) => (
-        <NavLink key={index} link={link} />
-      ))}
-    </Flex>
-    {children}
-  </Box>
-);
+const Layout = ({ children }: PropsWithChildren) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  return (
+    <Box>
+      <SidebarDesktop
+        onClose={onClose}
+        display={{ base: "none", md: "block" }} 
+      />
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
+        size="full"
+        placement="left"
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        autoFocus={false}
+      >
+        <DrawerContent>
+          <SidebarDesktop onClose={onClose} />
+        </DrawerContent>
+      </Drawer>
+      <Box ml={{base: 0, md: 60}} p={4}>
+        {children}
+      </Box>
+    </Box>
+  )
+};
 
 export default Layout

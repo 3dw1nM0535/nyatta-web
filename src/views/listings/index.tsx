@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { useQuery } from '@apollo/client';
 import { Box, Center, Flex, Icon, Image, Spinner, SimpleGrid, Text, Tag } from '@chakra-ui/react';
@@ -20,7 +20,7 @@ const ListingsView: React.FC = () => {
     },
     skip: status === 'unauthenticated' || status === 'loading',
   })
-  const properties = data?.getUser.getProperties || []
+  const properties = useMemo(() => data?.getUser.properties, [data])
 
   useEffect(() => {
     trackPageView({ url: "/listings", title: "Listings" })

@@ -5,6 +5,12 @@ export const GET_USER = gql`
     getUser(email: $email) {
       id
       phone
+      properties {
+        id
+        name
+        town
+        status
+      }
     }
   }
 `

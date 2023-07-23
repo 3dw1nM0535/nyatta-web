@@ -32,6 +32,7 @@ const AppProvider = ({ children }: Props) => {
     <AppContext.Provider
       value={{
         phone: data?.getUser?.phone,
+        user: data?.getUser,
       }}
     >
       {children}

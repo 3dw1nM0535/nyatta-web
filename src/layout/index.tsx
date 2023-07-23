@@ -47,10 +47,15 @@ const Layout = ({ children }: LayoutProps) => {
           </Drawer>
         </>
       )}
-      <Box p={4}>{children}</Box>
-      {pathname !== '/login/user' && (
-        <Box bottom="0" h={10} bg="white" left="0" w="100%" textAlign="center" position="fixed">
+      <Box>
+        {children}
+        {pathname !== '/login/user' && (
           <Text
+            bottom="0"
+            w="100%"
+            left="0"
+            textAlign="center"
+            position="fixed"
             as="a"
             color="green.800"
             href="mailto:lomolo@nyatta.app"
@@ -61,8 +66,9 @@ const Layout = ({ children }: LayoutProps) => {
           >
             Contact Us
           </Text>
-        </Box>
       )}
+      </Box>
+      
     </Box>
   )
 };

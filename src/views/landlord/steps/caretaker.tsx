@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useMutation } from "@apollo/client";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import {
@@ -34,14 +36,14 @@ import { usePropertyOnboarding, useAppContext } from "@hooks";
 import { type CaretakerForm } from "@types";
 import { CaretakerSchema } from "form/validations";
 
-const Caretaker = (): JSX.Element => {
+const Caretaker: React.FC = () => {
   const { phone } = useAppContext()
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
   const [sendVerification, { loading: sendingVerification }] = useMutation(
     SEND_VERIFICATION_CODE
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setStep, caretakerForm, setCaretakerForm, caretakerVerified, setCaretakerVerified } =
+  const { setStep, caretakerForm, setCaretakerForm, setCaretakerVerified } =
     usePropertyOnboarding();
   const {
     register,

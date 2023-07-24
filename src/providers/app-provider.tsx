@@ -3,10 +3,10 @@
 import { ReactNode } from "react";
 
 import { useQuery } from '@apollo/client';
-import { Center, Spinner } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 
 import { GET_USER } from "@gql";
+import Loader from 'components/loader'
 import { AppContext } from 'contexts/app-context'
 
 interface Props {
@@ -20,13 +20,7 @@ const AppProvider = ({ children }: Props) => {
     skip: status === 'unauthenticated' || status === 'loading',
   });
 
-  if (status === "loading" || userLoading) {
-    return (
-      <Center>
-        <Spinner thickness="8px" color="green.700" size="xl" />
-      </Center>
-    );
-  }
+  if (status === "loading" || userLoading) <Loader />
 
   return (
     <AppContext.Provider

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { AbsoluteCenter, Box, Flex, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import { trackPageView } from '@ga/analytics'
 import SearchForm from "form/search-listings";
 
-const Listings = () => {
+const ListingsView: React.FC = () => {
 
   useEffect(() => {
     trackPageView({ url: "/", title: "Home" })
@@ -40,4 +40,4 @@ const Listings = () => {
 )
 };
 
-export default Listings;
+export default ListingsView;

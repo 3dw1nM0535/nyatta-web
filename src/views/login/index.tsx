@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { AbsoluteCenter, Button, SimpleGrid,  Flex, Box, Icon, Text } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { FaCheckDouble } from 'react-icons/fa'
@@ -10,7 +12,7 @@ const reasons = [
   "Advertise vacant property/unit(s)",
 ]
 
-const Login = (): JSX.Element => (
+const LoginView: React.FC = () => (
     <AbsoluteCenter w="100%">
       <SimpleGrid
         columns={[1, null, 2]}
@@ -45,4 +47,4 @@ const Login = (): JSX.Element => (
     </AbsoluteCenter>
   );
 
-export default Login;
+export default LoginView;

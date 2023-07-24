@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { Container, HStack } from "@chakra-ui/react";
 
@@ -19,7 +19,7 @@ import {
 import { trackPageView } from '@ga/analytics'
 import { usePropertyOnboarding } from "@hooks";
 
-const Landlord = () => {
+const LandlordView: React.FC = () => {
   const { step } = usePropertyOnboarding();
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const Landlord = () => {
   );
 };
 
-export default Landlord;
+export default LandlordView;

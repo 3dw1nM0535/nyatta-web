@@ -1,10 +1,12 @@
 import { Metadata } from 'next'
 
-import Onboarding from "views/onboarding/user";
+import OnboardingView from "views/onboarding/user";
 
 export const metadata: Metadata = {
   title: "Nyatta - Login to get started",
 }
 
+const Page = () => <OnboardingView />;
+
 // `/onboarding/user`
-export default Onboarding;
+export default Page;

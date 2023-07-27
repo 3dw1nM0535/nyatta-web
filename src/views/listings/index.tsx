@@ -19,7 +19,7 @@ const ListingsView: React.FC = () => {
   const { defaultListing } = useListings()
   const { data, loading } = useQuery(GET_PROPERTY, {
     variables: {
-      id: defaultListing,
+      id: defaultListing?.value,
     },
     skip: !defaultListing,
   })

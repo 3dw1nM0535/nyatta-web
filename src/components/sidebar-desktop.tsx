@@ -1,3 +1,7 @@
+"use client"
+
+import { useMemo, useEffect } from 'react'
+
 import { Box, BoxProps, Flex, Text } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import Link from 'next/link'
@@ -11,13 +15,16 @@ interface SidebarProps extends BoxProps {
 
 const linkItems = [
   { label: "Overview", href: "/listings" },
-  { label: "Tenants", href: "/listings/tenancy" },
   { label: "Units", href: "/listings/units" },
 ]
 
 const SidebarDesktop = ({ ...rest }: SidebarProps) => {
-  const { listings, setDefaultListing } = useListings()
-  const selectListings = listings.map((item: any) => ({ label: item.name, value: item.id }))
+  const { listings, defaultListing, setDefaultListing } = useListings()
+  const selectListings = useMemo(() => listings.map((item: any) => ({ label: item.name, value: item.id })), [listings])
+
+  useEffect(() => {
+    setDefaultListing(selectListings[0])
+  }, [selectListings, setDefaultListing])
 
   return (
     <Flex
@@ -34,8 +41,8 @@ const SidebarDesktop = ({ ...rest }: SidebarProps) => {
             chakraStyles={chakraStylesConfig}
             isSearchable={false}
             options={selectListings}
-            onChange={(item: any) => setDefaultListing(item.value)}
-            defaultValue={selectListings[0]}
+            onChange={(item: any) => setDefaultListing(item)}
+            value={defaultListing}
           />
         </Box>
         {/* <CloseButton display={{base: "flex", md: "none"}} onClick={onClose} /> */}

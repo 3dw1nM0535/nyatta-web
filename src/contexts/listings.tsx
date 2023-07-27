@@ -1,8 +1,10 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
 
+import type { ListingOption } from 'types'
+
 interface ListingsContext {
-  defaultListing: string | undefined
-  setDefaultListing: Dispatch<SetStateAction<string | undefined>>
+  defaultListing: ListingOption | undefined
+  setDefaultListing: Dispatch<SetStateAction<ListingOption | undefined>>
   listings: any[] // TODO type this
   hasListings: boolean
 }

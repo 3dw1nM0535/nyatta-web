@@ -45,7 +45,6 @@ const SidebarDesktop = ({ ...rest }: SidebarProps) => {
             value={defaultListing}
           />
         </Box>
-        {/* <CloseButton display={{base: "flex", md: "none"}} onClick={onClose} /> */}
         <Flex gap={4} direction="column">
           {linkItems.map((item, index) => (
             <Link href={item.href} key={index}>

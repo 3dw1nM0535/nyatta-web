@@ -6,7 +6,6 @@ import { useQuery } from '@apollo/client';
 import { Flex, Text } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation'
 
-import Tenancy from './components/tenancy'
 import Units from './components/units'
 
 import { trackPageView } from '@ga/analytics';
@@ -30,8 +29,7 @@ const ListingsView: React.FC = () => {
 
   if (loading) return <Loader />
 
-  return pathname === "/listings/tenancy" ? (
-    <Tenancy />) : pathname === "/listings/units" ? (
+  return pathname === "/listings/units" ? (
     <Units />) :
   (
     <Flex

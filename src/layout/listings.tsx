@@ -7,7 +7,7 @@ import { Box, useDisclosure, Drawer, DrawerContent } from '@chakra-ui/react'
 import SidebarDesktop from 'components/sidebar-desktop'
 
 const linkItems = [
-  { label: "Overview", href: "/overview" },
+  { label: "Overview", href: "/listings" },
   { label: "Units", href: "/units" },
   { label: "Tenants", href: "/tenants" },
 ]

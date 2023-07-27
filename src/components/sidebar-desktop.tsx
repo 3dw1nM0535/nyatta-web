@@ -10,6 +10,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const linkItems = [
+  { label: "Overview", href: "/listings" },
   { label: "Tenants", href: "/listings/tenancy" },
   { label: "Units", href: "/listings/units" },
 ]

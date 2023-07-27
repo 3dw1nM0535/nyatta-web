@@ -30,8 +30,8 @@ const ListingsView: React.FC = () => {
   if (loading) return <Loader />
 
   return pathname === "/listings/units" ? (
-    <Units />) :
-  (
+    <Units />
+  ) : (
     <Flex
       direction={{
         base: "column",

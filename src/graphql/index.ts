@@ -5,6 +5,9 @@ export * from "./queries/hello";
 export * from './queries/getUser'
 export * from './queries/getUserProperties'
 export * from './queries/getProperty'
+export * from './queries/getPropertyUnits'
+export * from './queries/getPropertyTenancy'
+export * from './queries/listingOverview'
 // Mutations
 export * from "./mutations/uploadFile";
 export * from "./mutations/sendVerificationCode";

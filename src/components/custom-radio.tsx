@@ -26,7 +26,7 @@ const CustomRadio = (
         border="1px solid"
         borderRadius="md"
         _checked={{
-          color: "green",
+          color: "green.800",
         }}
         shadow={isChecked ? "md" : undefined}
         align="start"

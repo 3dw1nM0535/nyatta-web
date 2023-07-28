@@ -1,12 +1,13 @@
 "use client"
 
-import { PropsWithChildren, useMemo, useState, useEffect } from 'react'
+import { PropsWithChildren, useMemo, useState } from 'react'
 
 import { useQuery } from '@apollo/client'
 import { useSession } from 'next-auth/react'
 
 import { GET_USER_PROPERTIES } from '@gql'
 import ListingsContext from 'contexts/listings'
+import type { ListingOption } from 'types'
 
 const ListingsProvider = ({ children }: PropsWithChildren) => {
   const { data: session, status } = useSession()
@@ -18,12 +19,8 @@ const ListingsProvider = ({ children }: PropsWithChildren) => {
     skip: skipRequest,
   })
   const listings = useMemo(() => (data?.getUser.properties || []), [data])
-  const [defaultListing, setDefaultListing] = useState<string | undefined>()
+  const [defaultListing, setDefaultListing] = useState<ListingOption>()
   const hasListings = useMemo(() => data?.getUser.properties.length > 0, [data])
-
-  useEffect(() => {
-    setDefaultListing(listings[0]?.id)
-  }, [listings])
 
   return (
     <ListingsContext.Provider

@@ -1,3 +1,5 @@
+import type { OptionBase } from 'chakra-react-select'
+
 export type Status = "pending" | "approved" | "sign-in";
 
 export interface SignInForm {
@@ -123,4 +125,9 @@ export interface Session {
 
 export interface MailingForm {
   email: string;
+}
+
+export interface ListingOption extends OptionBase {
+  label: string
+  value: string
 }

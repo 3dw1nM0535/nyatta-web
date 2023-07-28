@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 
 import { useQuery } from '@apollo/client';
-import { Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation'
 
 import Units from './components/units'
@@ -38,10 +38,42 @@ const ListingsView: React.FC = () => {
         md: "row",
       }}
       gap={4}
+      justifyContent="space-between"
+      align="center"
     >
-      <Text>{data?.listingOverview.totalUnits}</Text>
-      <Text>{data?.listingOverview.occupiedUnits}</Text>
-      <Text>{data?.listingOverview.vacantUnits}</Text>
+      <Box
+        p={4}
+        shadow="md"
+        border="1px solid"
+        borderRadius="md"
+        w="full"
+        textAlign="center"
+      >
+        <Text color="green.800" fontWeight="bold" fontSize="xl">Total Units</Text>
+        <Text>{data?.listingOverview.totalUnits}</Text>
+      </Box>
+      <Box
+        p={4}
+        shadow="md"
+        border="1px solid"
+        borderRadius="md"
+        textAlign="center"
+        w="full"
+      >
+        <Text color="green.800" fontWeight="bold" fontSize="xl">Occupied Units</Text>
+        <Text>{data?.listingOverview.occupiedUnits}</Text>
+      </Box> 
+      <Box
+        p={4}
+        shadow="md"
+        border="1px solid"
+        borderRadius="md"
+        w="full"
+        textAlign="center"
+      >
+        <Text color="green.800" fontWeight="bold" fontSize="xl">Vacant Units</Text>
+        <Text>{data?.listingOverview.vacantUnits}</Text>
+      </Box>
     </Flex>
   )
 }

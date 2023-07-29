@@ -28,12 +28,12 @@ export const FormSteps: OnboardingStep[] = [
 
 export const FormStepTitle: Record<OnboardingStep, string> = {
   description: "Property name",
-  location: "Describe your property by locality.",
+  location: "Describe your property by locality",
   caretaker:
-    "Immediate contact person. This can be the caretaker.",
+    "Immediate contact person. This can be the caretaker",
   units: "How best can you describe your units?",
   type: "Property type?",
-  shoot: "Schedule a professional shoot.",
+  shoot: "Schedule a professional shoot",
   submitted: "You're all set🎉!",
 };
 

@@ -26,11 +26,11 @@ const Units: React.FC = () => {
   return (
     <SimpleGrid columns={[1, null, 3]}>
       {units.length > 0 ? (
-        <Flex>
+        <Box w="100%">
           {units.map((unit: any, index: number) => (
             <Center key={index}>
-              <Box p={5}  borderWidth="1px">
-                <Flex align="baseline" mt={2}>
+              <Flex grow={1} direction="column" maxW={{md:"320px"}} p={5} ml={{ md:10 }} borderWidth="1px">
+                <Flex align="baseline">
                   <Text
                     textTransform="uppercase"
                     fontWeight="bold"
@@ -43,10 +43,10 @@ const Units: React.FC = () => {
                 </Flex>
                 <Text mt={2} fontSize="sm" fontWeight="bold">{unitType(unit.type)}</Text>
                 <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
-              </Box>
+              </Flex>
             </Center>
           ))}
-        </Flex>
+        </Box>
       ) : (
         <Center>No units found</Center>
       )}

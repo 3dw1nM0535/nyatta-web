@@ -50,7 +50,7 @@ const UserMenu = ({ ...rest }): JSX.Element => {
               <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
-          {pathname === "/listings" && <MobileNav display={{ base: "flex", md: "none" }} />}
+          {pathname.includes("/listings") && <MobileNav display={{ base: "flex", md: "none" }} />}
         </Flex>
       )}
     </HStack>

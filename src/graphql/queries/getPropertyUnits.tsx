@@ -5,6 +5,9 @@ export const GET_PROPERTY_UNITS = gql`
     getPropertyUnits (propertyId: $propertyId) {
       id
       name
+      type
+      price
+      state
       amenityCount
     }
   }

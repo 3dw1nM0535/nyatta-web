@@ -3,7 +3,8 @@
 import { useMemo } from 'react'
 
 import { useQuery } from '@apollo/client'
-import { Box, Badge, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Badge, Center, Flex, Icon, SimpleGrid, Text } from '@chakra-ui/react'
+import { MdImageNotSupported } from 'react-icons/md'
 
 import { GET_PROPERTY_UNITS } from '@gql'
 import Loader from 'components/loader'
@@ -29,6 +30,13 @@ const Units: React.FC = () => {
         {units.length > 0 && units.map((unit: any, index: number) => (
           <Center key={index}>
             <Flex grow={1} direction="column" p={5} ml={{ md:10 }} borderWidth="1px">
+              <Center>
+                <Icon
+                  as={MdImageNotSupported}
+                  boxSize="10em"
+                  color="gray.200"
+                />
+              </Center>
               <Flex align="baseline">
                 <Text
                   textTransform="uppercase"

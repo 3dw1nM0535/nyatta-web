@@ -28,7 +28,7 @@ const Units: React.FC = () => {
       <Box w={{base: "full", md: 60}}>
         {units.length > 0 && units.map((unit: any, index: number) => (
           <Center key={index}>
-            <Flex grow={1} direction="column" maxW={{md:"320px"}} p={5} ml={{ md:10 }} borderWidth="1px">
+            <Flex grow={1} direction="column" p={5} ml={{ md:10 }} borderWidth="1px">
               <Flex align="baseline">
                 <Text
                   textTransform="uppercase"

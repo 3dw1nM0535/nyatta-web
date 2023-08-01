@@ -25,31 +25,30 @@ const Units: React.FC = () => {
 
   return (
     <SimpleGrid columns={[1, null, 3]}>
-      {units.length > 0 ? (
-        <Box w="100%">
-          {units.map((unit: any, index: number) => (
-            <Center key={index}>
-              <Flex grow={1} direction="column" maxW={{md:"320px"}} p={5} ml={{ md:10 }} borderWidth="1px">
-                <Flex align="baseline">
-                  <Text
-                    textTransform="uppercase"
-                    fontWeight="bold"
-                    fontSize="sm"
-                  >
-                    {unit.name}
-                  </Text>
-                  <Badge ml={2} colorScheme="green">{unit.state}</Badge>
-                  <Text ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
-                </Flex>
-                <Text mt={2} fontSize="sm" fontWeight="bold">{unitType(unit.type)}</Text>
-                <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
+      <Box w={{base: "full", md: 60}}>
+        {units.length > 0 && units.map((unit: any, index: number) => (
+          <Center key={index}>
+            <Flex grow={1} direction="column" p={5} ml={{ md:10 }} borderWidth="1px">
+              <Flex align="baseline">
+                <Text
+                  textTransform="uppercase"
+                  fontWeight="bold"
+                  fontSize="sm"
+                >
+                  {unit.name}
+                </Text>
+                <Badge ml={2} colorScheme="green">{unit.state}</Badge>
+                <Text ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
               </Flex>
-            </Center>
-          ))}
-        </Box>
-      ) : (
-        <Center>No units found</Center>
-      )}
+              <Text mt={2} fontSize="sm" fontWeight="bold">{unitType(unit.type)}</Text>
+              <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
+            </Flex>
+          </Center>
+        ))}
+        {units.length === 0 && (
+          <Center>No Listings</Center>
+        )}
+      </Box>
     </SimpleGrid>
   )
 }

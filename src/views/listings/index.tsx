@@ -60,7 +60,7 @@ const ListingsView: React.FC = () => {
         textAlign="center"
         w="full"
       >
-        <Text color="green.800" fontWeight="bold" fontSize="xl">Occupied Units</Text>
+        <Text color="green.800" fontWeight="bold" fontSize="xl">Occupied</Text>
         <Text>{data?.listingOverview.occupiedUnits}</Text>
       </Box> 
       <Box
@@ -71,7 +71,7 @@ const ListingsView: React.FC = () => {
         w="full"
         textAlign="center"
       >
-        <Text color="green.800" fontWeight="bold" fontSize="xl">Vacant Units</Text>
+        <Text color="green.800" fontWeight="bold" fontSize="xl">Vacant</Text>
         <Text>{data?.listingOverview.vacantUnits}</Text>
       </Box>
     </Flex>

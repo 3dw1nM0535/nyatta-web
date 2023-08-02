@@ -50,22 +50,21 @@ const Layout = ({ children }: LayoutProps) => {
       <Box>
         {children}
         {pathname !== '/login/user' && (
-          <Text
-            bottom="0"
-            w="100%"
-            left="0"
-            textAlign="center"
-            position="fixed"
-            as="a"
-            color="green.800"
-            href="mailto:lomolo@nyatta.app"
-            _hover={{
-              cursor: "pointer",
-            }}
-            textDecoration="underline"
-          >
-            Contact Us
-          </Text>
+          <Box w="100%" bottom="0" textAlign="center">
+            <Text
+              left="0"
+              textAlign="center"
+              as="a"
+              color="green.800"
+              href="mailto:lomolo@nyatta.app"
+              _hover={{
+                cursor: "pointer",
+              }}
+              textDecoration="underline"
+            >
+              Contact Us
+            </Text>
+          </Box>
       )}
       </Box>
       

@@ -2,7 +2,8 @@
 
 import React, { useEffect } from "react";
 
-import { Button, Container, Heading, Flex, Image, Text, Stack, SimpleGrid } from "@chakra-ui/react";
+import { Button, Container, Heading, Text, Stack } from "@chakra-ui/react";
+import Link from 'next/link'
 
 import { trackPageView } from '@ga/analytics'
 
@@ -13,7 +14,7 @@ const ListingsView: React.FC = () => {
   }, [])
 
   return (
-    <Container h="100vh" maxW="5xl">
+    <Container maxW="5xl">
       <Stack
         textAlign="center"
         align="center"
@@ -37,33 +38,13 @@ const ListingsView: React.FC = () => {
           <Button
             px="6"
             size="lg"
+            as={Link}
+            href="/property/setup"
           >
             Get Started
           </Button>
         </Stack>
       </Stack>
-      <SimpleGrid mb={10} columns={[1, 2]} spacing={10}>
-        <Stack>
-          <Heading>Modern property management software</Heading>
-          <Text>Marketing headline</Text>
-          <Stack>
-            <Stack direction="row" align="center">
-              <Flex>
-                Icon
-              </Flex>
-              <Text fontWeight={600}>Feature description</Text>
-            </Stack>
-          </Stack>
-        </Stack>
-        <Flex>
-          <Image
-            src={"https://nyatta-media.s3.amazonaws.com/vacant_unfurnished_apartment_with_a_balcony_and_african_00656184-015b-4296-8063-d4957def7a7d.png"}
-            alt="Vacant unfurnished apartment with a balcony and african"
-            rounded={"md"}
-            objectFit="cover"
-          />
-        </Flex>
-      </SimpleGrid>
     </Container>
   )
 };

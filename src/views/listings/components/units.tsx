@@ -29,7 +29,7 @@ const Units: React.FC = () => {
       <Box w={{base: "full", md: 60}}>
         {units.length > 0 && units.map((unit: any, index: number) => (
           <Center key={index}>
-            <Flex grow={1} direction="column" p={5} ml={{ md:10 }} borderWidth="1px">
+            <Box p="5" w="100%"borderWidth="1px">
               <Center>
                 <Icon
                   as={MdImageNotSupported}
@@ -46,15 +46,15 @@ const Units: React.FC = () => {
                   {unit.name}
                 </Text>
                 <Badge ml={2} colorScheme="green">{unit.state}</Badge>
-                <Text ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
+                <Text overflow="wrap" noOfLines={[1,2]} ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
               </Flex>
               <Text mt={2} fontSize="sm" fontWeight="bold">{unitType(unit.type)}</Text>
               <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
-            </Flex>
+            </Box>
           </Center>
         ))}
         {units.length === 0 && (
-          <Center>No Listings</Center>
+          <Flex justifyContent={{base: "center", md: "flex-start"}}>No Listings</Flex>
         )}
       </Box>
     </SimpleGrid>

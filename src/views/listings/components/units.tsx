@@ -3,7 +3,8 @@
 import { useMemo } from 'react'
 
 import { useQuery } from '@apollo/client'
-import { Box, Badge, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Badge, Center, Flex, Icon, SimpleGrid, Text } from '@chakra-ui/react'
+import { MdImageNotSupported } from 'react-icons/md'
 
 import { GET_PROPERTY_UNITS } from '@gql'
 import Loader from 'components/loader'
@@ -28,7 +29,14 @@ const Units: React.FC = () => {
       <Box w={{base: "full", md: 60}}>
         {units.length > 0 && units.map((unit: any, index: number) => (
           <Center key={index}>
-            <Flex grow={1} direction="column" p={5} ml={{ md:10 }} borderWidth="1px">
+            <Box p="5" w="100%"borderWidth="1px">
+              <Center>
+                <Icon
+                  as={MdImageNotSupported}
+                  boxSize="10em"
+                  color="gray.200"
+                />
+              </Center>
               <Flex align="baseline">
                 <Text
                   textTransform="uppercase"
@@ -38,15 +46,15 @@ const Units: React.FC = () => {
                   {unit.name}
                 </Text>
                 <Badge ml={2} colorScheme="green">{unit.state}</Badge>
-                <Text ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
+                <Text overflow="wrap" noOfLines={[1,2]} ml={2}>{`Amenities(${unit.amenityCount})`}</Text>
               </Flex>
               <Text mt={2} fontSize="sm" fontWeight="bold">{unitType(unit.type)}</Text>
               <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
-            </Flex>
+            </Box>
           </Center>
         ))}
         {units.length === 0 && (
-          <Center>No Listings</Center>
+          <Flex justifyContent={{base: "center", md: "flex-start"}}>No Listings</Flex>
         )}
       </Box>
     </SimpleGrid>

@@ -1,22 +1,28 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { useQuery } from '@apollo/client';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation'
 
 import Units from './components/units'
 
 import { trackPageView } from '@ga/analytics';
-import { GET_LISTING_OVERVIEW } from '@gql';
+import { GET_LISTING_OVERVIEW, GET_PROPERTY_UNITS } from '@gql';
 import { useListings } from '@hooks';
 import Loader from 'components/loader';
 
 const ListingsView: React.FC = () => {
   const pathname = usePathname()
   const { defaultListing } = useListings()
-  const { data, loading } = useQuery(GET_LISTING_OVERVIEW, {
+  const { data, loading: loadingListingOverview } = useQuery(GET_LISTING_OVERVIEW, {
+    variables: {
+      propertyId: defaultListing?.value,
+    },
+    skip: !defaultListing,
+  })
+  const { data: unitsData, loading: unitsLoading } = useQuery(GET_PROPERTY_UNITS, {
     variables: {
       propertyId: defaultListing?.value,
     },
@@ -27,10 +33,19 @@ const ListingsView: React.FC = () => {
     trackPageView({ url: "/listings", title: "Listings" })
   }, [])
 
-  if (loading) return <Loader />
+  const units = useMemo(() => (unitsData?.getPropertyUnits || []), [unitsData])
+
+  if (loadingListingOverview || unitsLoading) return <Loader />
 
   return pathname === "/listings/units" ? (
-    <Units />
+    <SimpleGrid columns={{sm: 1, md: 2, lg: 3}} spacing="20px">
+      {units.length > 0 && units.map((unit: any) => (
+        <Units key={unit.id} unit={unit} />
+      ))}
+      {units.length === 0 && (
+        <Text>No units</Text>
+      )}
+    </SimpleGrid>
   ) : (
     <Flex
       direction={{

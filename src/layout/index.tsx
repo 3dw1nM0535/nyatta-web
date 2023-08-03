@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 
-import { Box, Text, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, useDisclosure } from "@chakra-ui/react";
+import { Box, Container, Center, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, Text, useDisclosure } from "@chakra-ui/react";
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ReactGA from 'react-ga4';
@@ -49,25 +49,21 @@ const Layout = ({ children }: LayoutProps) => {
       )}
       <Box>
         {children}
-        {pathname !== '/login/user' && (
-          <Box w="100%" bottom="0" textAlign="center">
-            <Text
-              left="0"
-              textAlign="center"
-              as="a"
-              color="green.800"
-              href="mailto:lomolo@nyatta.app"
-              _hover={{
-                cursor: "pointer",
-              }}
-              textDecoration="underline"
-            >
-              Contact Us
-            </Text>
+        {pathname === '/' && (
+          <Box w="100%">
+            <Container as="footer" px={0} py={4} role="contentinfo">
+              <Center>
+                <Text
+                  textAlign="center"
+                  fontSize="sm"
+                >
+                  Contact Us | lomolo@nyatta.app
+                </Text>
+              </Center>
+            </Container>
           </Box>
-      )}
+        )}
       </Box>
-      
     </Box>
   )
 };

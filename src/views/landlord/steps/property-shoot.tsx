@@ -123,7 +123,8 @@ const Shoot = (): JSX.Element => {
             trackAction('setup-property')
             setStep('submitted')
           }
-        }
+        },
+        refetchQueries: ['getUserProperties'],
       })
     }
   };

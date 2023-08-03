@@ -18,9 +18,9 @@ const ListingsProvider = ({ children }: PropsWithChildren) => {
     },
     skip: skipRequest,
   })
-  const listings = useMemo(() => (data?.getUser.properties || []), [data])
+  const listings = useMemo(() => (data?.getUserProperties || []), [data])
   const [defaultListing, setDefaultListing] = useState<ListingOption>()
-  const hasListings = useMemo(() => data?.getUser.properties.length > 0, [data])
+  const hasListings = useMemo(() => data?.getUserProperties.length > 0, [data])
 
   return (
     <ListingsContext.Provider

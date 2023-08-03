@@ -1,16 +1,13 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_PROPERTIES = gql`
-  query GetUser($email: String!) {
-    getUser(email: $email) {
+  query GetUserProperties {
+    getUserProperties {
       id
-      properties {
-        id
-        name
-        town
-        type
-        status
-      }
+      name
+      town
+      type
+      status
     }
   }
 `

@@ -12,6 +12,7 @@ import { trackPageView } from '@ga/analytics';
 import { GET_LISTING_OVERVIEW, GET_PROPERTY_UNITS } from '@gql';
 import { useListings } from '@hooks';
 import Loader from 'components/loader';
+import LandlordView from 'views/landlord'
 
 const ListingsView: React.FC = () => {
   const pathname = usePathname()
@@ -46,6 +47,8 @@ const ListingsView: React.FC = () => {
         <Text>No units</Text>
       )}
     </SimpleGrid>
+  ) : pathname === "/listings/setup" ? (
+    <LandlordView />
   ) : (
     <Flex
       direction={{

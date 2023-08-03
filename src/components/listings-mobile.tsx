@@ -13,9 +13,9 @@ import { useListings } from 'hooks'
 import { chakraStylesConfig } from 'styles'
 
 const linkItems = [
-  { label: "Overview", href: "/", icon: FaHome },
+  { label: "Overview", href: "/listings", icon: FaHome },
   { label: "Units", href: "/listings/units", icon: MdOutlineExplore },
-  { label: "Add", href: "/property/setup", icon: BsHouseAdd },
+  { label: "Add", href: "/listings/setup", icon: BsHouseAdd },
 ]
 
 const MobileNav = ({ ...rest }: BoxProps) => {

@@ -125,6 +125,7 @@ const Shoot = (): JSX.Element => {
           }
         },
         refetchQueries: ['getUserProperties'],
+        awaitRefetchQueries: true,
       })
     }
   };

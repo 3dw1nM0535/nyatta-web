@@ -39,7 +39,7 @@ const ListingsView: React.FC = () => {
             px="6"
             size="lg"
             as={Link}
-            href="/property/setup"
+            href="/listings/setup"
           >
             Get Started
           </Button>

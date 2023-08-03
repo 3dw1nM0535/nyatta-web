@@ -5,12 +5,13 @@ import { MdImageNotSupported } from 'react-icons/md'
 
 const unitType = (type: string) => type.length === 1 ? `${type} bedroom` : type
 
-// TODO type props
-const Units: React.FC = (props: any) => {
-  const { unit } = props
+interface Props {
+  // TODO type props
+  unit: any
+}
 
-  return (
-    <Box p="5" borderWidth="1px">
+const Units = ({ unit }: Props) => (
+    <Box borderRadius="lg" p="5" borderWidth="1px">
       <Center>
         <Icon
           as={MdImageNotSupported}
@@ -34,6 +35,5 @@ const Units: React.FC = (props: any) => {
       <Text mt={2}>{`${new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES" }).format(unit.price)}`}/month</Text>
     </Box>
   )
-}
 
 export default Units

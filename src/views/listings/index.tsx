@@ -38,7 +38,7 @@ const ListingsView: React.FC = () => {
   if (loadingListingOverview || unitsLoading) return <Loader />
 
   return pathname === "/listings/units" ? (
-    <SimpleGrid columns={{sm: 1, md: 2, lg: 3}} spacing="40px">
+    <SimpleGrid columns={{sm: 1, md: 2, lg: 3}} spacing="20px">
       {units.length > 0 && units.map((unit: any) => (
         <Units key={unit.id} unit={unit} />
       ))}

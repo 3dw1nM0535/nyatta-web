@@ -62,9 +62,8 @@ const Layout = ({ children }: LayoutProps) => {
               </Center>
             </Container>
           </Box>
-      )}
+        )}
       </Box>
-      
     </Box>
   )
 };

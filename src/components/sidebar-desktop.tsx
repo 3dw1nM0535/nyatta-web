@@ -2,10 +2,13 @@
 
 import { useMemo, useEffect } from 'react'
 
-import { Box, BoxProps, Flex, Text } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, Icon, Text } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { BsHouseAdd } from 'react-icons/bs'
+import { FaHome } from 'react-icons/fa'
+import { MdOutlineExplore } from 'react-icons/md'
 
 import { useListings } from 'hooks'
 import { chakraStylesConfig } from 'styles'
@@ -15,8 +18,9 @@ interface SidebarProps extends BoxProps {
 }
 
 const linkItems = [
-  { label: "Overview", href: "/listings" },
-  { label: "Units", href: "/listings/units" },
+  { label: "Overview", href: "/listings", icon: FaHome },
+  { label: "Units", href: "/listings/units", icon: MdOutlineExplore },
+  { label: "Add", href: "/property/setup", icon: BsHouseAdd },
 ]
 
 const SidebarDesktop = ({ ...rest }: SidebarProps) => {
@@ -63,6 +67,13 @@ const SidebarDesktop = ({ ...rest }: SidebarProps) => {
                 }}
                 cursor="pointer"
               >
+                {item.icon && (
+                  <Icon
+                    mr={4}
+                    fontSize={16}
+                    as={item.icon}
+                  />
+                )}
                 <Text fontWeight="bold">{item.label}</Text>
               </Flex>
             </Link>

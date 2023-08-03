@@ -1,12 +1,14 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { BsHouseAdd } from 'react-icons/bs'
 import { FaHome } from 'react-icons/fa'
 import { MdOutlineExplore} from 'react-icons/md'
 
 const linkItems = [
-  {label: "Setup", href: '/property/setup', icon: FaHome},
-  {label: "Listings", href: '/listings', icon: MdOutlineExplore},
+  { label: "Overview", href: "/listings", icon: FaHome },
+  { label: "Units", href: "/listings/units", icon: MdOutlineExplore },
+  { label: "Add", href: "/property/setup", icon: BsHouseAdd },
 ]
 
 const Sidebar = ({ onClose, ...rest }: any): JSX.Element => {
@@ -37,13 +39,12 @@ const Sidebar = ({ onClose, ...rest }: any): JSX.Element => {
             {item.icon && (
               <Icon
                 mr={4}
-                fontSize="16"
+                fontSize={16}
                 as={item.icon}
               />
             )}
             <Text>{item.label}</Text>
           </Flex>
-          
         </Link>
       ))}
     </Box>

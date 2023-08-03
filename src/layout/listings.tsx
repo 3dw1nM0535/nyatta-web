@@ -13,7 +13,7 @@ const linkItems = [
 ]
 
 const Layout = ({ children }: PropsWithChildren) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onClose } = useDisclosure()
 
   return (
     <Box>

@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { BoxProps, CloseButton, Drawer, DrawerContent, Flex, HStack, IconButton, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { FiMenu } from 'react-icons/fi'
 
 import { useListings } from 'hooks'
@@ -14,9 +15,14 @@ const linkItems = [
 ]
 
 const MobileNav = ({ ...rest }: BoxProps) => {
+  const pathname = usePathname()
   const { defaultListing, listings, setDefaultListing } = useListings()
   const { isOpen, onClose, onOpen } = useDisclosure()
   const selectListings = useMemo(() => listings.map((item: any) => ({ label: item.name, value: item.id })), [listings])
+  const handleSelectListing = (item: any) => {
+    setDefaultListing(item)
+    onClose()
+  }
 
   return (
     <Flex
@@ -42,13 +48,14 @@ const MobileNav = ({ ...rest }: BoxProps) => {
       >
         <DrawerContent>
           <Flex mx={4} p={4} alignItems="center">
-            <Flex w="full" direction="column" my={4} mx={4}>
+            <Flex grow={1} direction="column" my={4}>
               <HStack mb={10}>
                 <Select
                   chakraStyles={chakraStylesConfig}
                   isSearchable={false}
                   options={selectListings}
-                  onChange={(item: any) => setDefaultListing(item)}
+                  selectedOptionStyle="check"
+                  onChange={handleSelectListing}
                   value={defaultListing}
                 />
                 <Spacer />
@@ -56,8 +63,21 @@ const MobileNav = ({ ...rest }: BoxProps) => {
               </HStack>
               <Flex gap={4} direction="column">
                 {linkItems.map((item, index) => (
-                  <Link href={item.href} key={index}>
-                    <Text fontWeight="bold">{item.label}</Text>
+                  <Link onClick={onClose} href={item.href} key={index}>
+                    <Flex
+                      align="center"
+                      p={4}
+                      borderRadius="lg"
+                      bg={pathname === item.href ? "green.700" : "white"}
+                      color={pathname === item.href ? "white" : "black"}
+                      _hover={{
+                        bg: "green.700",
+                        color: "white",
+                      }}
+                      cursor="pointer"
+                    >
+                      <Text fontWeight="bold">{item.label}</Text>
+                    </Flex>
                   </Link>
                 ))}
               </Flex>

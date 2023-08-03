@@ -5,6 +5,7 @@ import { useMemo, useEffect } from 'react'
 import { Box, BoxProps, Flex, Text } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { useListings } from 'hooks'
 import { chakraStylesConfig } from 'styles'
@@ -19,6 +20,7 @@ const linkItems = [
 ]
 
 const SidebarDesktop = ({ ...rest }: SidebarProps) => {
+  const pathname = usePathname()
   const { listings, defaultListing, setDefaultListing } = useListings()
   const selectListings = useMemo(() => listings.map((item: any) => ({ label: item.name, value: item.id })), [listings])
 
@@ -43,12 +45,26 @@ const SidebarDesktop = ({ ...rest }: SidebarProps) => {
             options={selectListings}
             onChange={(item: any) => setDefaultListing(item)}
             value={defaultListing}
+            selectedOptionStyle="check"
           />
         </Box>
         <Flex gap={4} direction="column">
           {linkItems.map((item, index) => (
             <Link href={item.href} key={index}>
-              <Text fontWeight="bold">{item.label}</Text>
+              <Flex
+                align="center"
+                borderRadius="lg"
+                bg={pathname === item.href ? "green.700" : "white"}
+                color={pathname === item.href ? "white" : "black"}
+                p={4}
+                _hover={{
+                  bg: "green.700",
+                  color: "white",
+                }}
+                cursor="pointer"
+              >
+                <Text fontWeight="bold">{item.label}</Text>
+              </Flex>
             </Link>
           ))}
         </Flex>

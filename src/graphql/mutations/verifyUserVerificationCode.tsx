@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const verifyUserVerificationCode = gql`
-  mutation VerifyUserVerificationCode($input: UserVerificationInput!) {
+  mutation verifyUserVerificationCode($input: UserVerificationInput!) {
     verifyUserVerificationCode(input: $input) {
       success
     }

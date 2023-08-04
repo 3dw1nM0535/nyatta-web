@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const SAVE_MAIL = gql`
-  mutation SaveMailing($email: String!) {
+  mutation saveMailing($email: String!) {
     saveMailing(email: $email) {
       success
     }

@@ -1,14 +1,17 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useEffect, useMemo } from 'react'
 
 import { Box, Container, Center, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, Text, useDisclosure } from "@chakra-ui/react";
-import Link from 'next/link'
+import { Select } from 'chakra-react-select'
 import { usePathname } from 'next/navigation'
 import ReactGA from 'react-ga4';
 
 import Header from "components/header";
 import Sidebar from "components/sidebar-menu";
+import { useListings } from 'hooks'
+import { chakraStylesConfig } from 'styles'
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,8 +27,18 @@ if (process.env.NEXT_PUBLIC_ENV === 'production') {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { defaultListing, setDefaultListing, listings } = useListings()
+  const selectListings = useMemo(() => listings.map((item: any) => ({ label: item.name, value: item.id })), [listings])
   const { isOpen, onClose, onOpen } = useDisclosure();
   const pathname = usePathname()
+  const handleSelectListing = (item: any) => {
+    setDefaultListing(item)
+    onClose()
+  }
+
+  useEffect(() => {
+    setDefaultListing(selectListings[0])
+  }, [selectListings, setDefaultListing])
 
   return (
     <Box minH="100vh" bg="white">
@@ -41,7 +54,17 @@ const Layout = ({ children }: LayoutProps) => {
           >
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader onClick={() => setTimeout(onClose, 300)} as={Link} href="/" color="green.800">Nyatta</DrawerHeader>
+              <DrawerHeader color="green.800">Nyatta</DrawerHeader>
+              <Box px={4} mb={10}>
+              <Select
+                chakraStyles={chakraStylesConfig}
+                isSearchable={false}
+                options={selectListings}
+                onChange={handleSelectListing}
+                value={defaultListing}
+                selectedOptionStyle="check"
+              />
+              </Box>
               <Sidebar onClose={onClose} />
             </DrawerContent>
           </Drawer>

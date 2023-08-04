@@ -28,7 +28,7 @@ const ListingsView: React.FC = () => {
           maxW="4xl"
         >
           <Text as="span" textDecoration="underline" color="green.800">Nyatta{' '}</Text>
-          is a better way to manage your property.
+          is a better way to manage your property
         </Heading>
         <Text color="gray.500">
           Modern tools to onboard your property, streamline units and tenancy.<br />

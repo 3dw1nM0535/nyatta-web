@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const HANDSHAKE_USER = gql`
-  mutation Handshake($input: HandshakeInput!) {
+  mutation handshake($input: HandshakeInput!) {
     handshake(input: $input) {
       id
       onboarding

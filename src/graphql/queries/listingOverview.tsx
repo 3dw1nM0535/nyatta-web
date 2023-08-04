@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_LISTING_OVERVIEW = gql`
-  query ListingOverview($propertyId: ID!) {
+  query listingOverview($propertyId: ID!) {
     listingOverview(propertyId: $propertyId) {
       totalUnits
       occupiedUnits

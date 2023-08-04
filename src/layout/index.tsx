@@ -5,7 +5,6 @@ import { useEffect, useMemo } from 'react'
 
 import { Box, Container, Center, Drawer, DrawerContent, DrawerCloseButton, DrawerHeader, Text, useDisclosure } from "@chakra-ui/react";
 import { Select } from 'chakra-react-select'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ReactGA from 'react-ga4';
 
@@ -55,7 +54,7 @@ const Layout = ({ children }: LayoutProps) => {
           >
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader onClick={() => setTimeout(onClose, 300)} as={Link} href="/" color="green.800">Nyatta</DrawerHeader>
+              <DrawerHeader color="green.800">Nyatta</DrawerHeader>
               <Box px={4} mb={10}>
               <Select
                 chakraStyles={chakraStylesConfig}

@@ -1,7 +1,9 @@
-import { Button, Select as ChakraSelect, FormControl, FormLabel, FormHelperText, FormErrorMessage, Input, Modal, ModalContent, ModalBody, ModalHeader, ModalOverlay, Stack } from '@chakra-ui/react'
+import { useEffect } from 'react'
+
+import { Box, Button, Select as ChakraSelect, FormControl, FormLabel, FormHelperText, FormErrorMessage, Input, Modal, ModalContent, ModalBody, ModalHeader, ModalOverlay, Stack, Text } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Select } from 'chakra-react-select'
-import { Controller, useForm, SubmitHandler } from 'react-hook-form'
+import { Controller, useForm, useFieldArray, SubmitHandler } from 'react-hook-form'
 
 import data from 'data/data.json'
 import { UnitSchema } from 'form/validations'
@@ -15,10 +17,83 @@ interface Props {
 
 const AddUnit = ({ isOpen, onClose }: Props) => {
   const { amenities } = data
-  const { control, register, handleSubmit, formState: { errors } } = useForm<Unit>({
+  const { control, register, watch, handleSubmit, formState: { errors } } = useForm<Unit>({
     resolver: yupResolver(UnitSchema),
   })
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "bedrooms",
+  });
   const onSubmit: SubmitHandler<Unit> = data => console.log(data)
+  const type = watch("type")
+
+  useEffect(() => {
+    const totalBedrooms = Number(type);
+    if (isNaN(totalBedrooms) && fields.length > 0) {
+      for (let i = fields.length - 1; i >= 0; i--) {
+        remove(i);
+      }
+    } else if (totalBedrooms > fields.length) {
+      for (let i = fields.length; i < totalBedrooms; i++) {
+        append({ bedroomNumber: i + 1, enSuite: "no", master: "no" });
+      }
+    } else if (totalBedrooms < fields.length) {
+      for (let i = fields.length - 1; i >= totalBedrooms; i--) {
+        remove(i);
+      }
+    }
+  }, [type, append, remove, fields.length]);
+
+  // TODO refactor this to a component
+  const RenderBedrooms = ({ type }: any) => (
+      <Box mt={5}>
+        {!!type &&
+          type !== "studio" &&
+          type !== "single room" &&
+          fields.length > 0 && <Text>{`Bedrooms(${type})`}</Text>}
+        {fields.length > 0 &&
+          fields.map((field, itemIndex) => (
+            <Stack direction="row" align="center" key={field.id}>
+              <FormControl>
+                <FormLabel>Bedroom Number</FormLabel>
+                <Input
+                  {...register(
+                    `bedrooms.${itemIndex}.bedroomNumber`
+                  )}
+                  size="sm"
+                  disabled
+                  type="number"
+                  defaultValue={field.bedroomNumber}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>en-Suite</FormLabel>
+                <ChakraSelect
+                  size="sm"
+                  {...register(
+                    `bedrooms.${itemIndex}.enSuite`
+                  )}
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </ChakraSelect>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Master</FormLabel>
+                <ChakraSelect
+                  size="sm"
+                  {...register(
+                    `bedrooms.${itemIndex}.master`
+                  )}
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </ChakraSelect>
+              </FormControl>
+            </Stack>
+          ))}
+      </Box>
+    );
 
   return (
     <Modal scrollBehavior="inside" motionPreset="slideInBottom" isCentered size="sm" isOpen={isOpen} onClose={onClose}>
@@ -103,6 +178,7 @@ const AddUnit = ({ isOpen, onClose }: Props) => {
                  <option value="3">3 bedroom</option>
                 </ChakraSelect>
               </FormControl>
+              <RenderBedrooms type={type} />
               <Button size="sm" type="submit">Add</Button>
             </Stack>
           </form>

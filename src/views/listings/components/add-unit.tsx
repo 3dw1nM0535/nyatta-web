@@ -25,7 +25,7 @@ const AddUnit = ({ isOpen, onClose }: Props) => {
       <ModalOverlay
         backdropFilter="auto"
         bg="none"
-        backdropInvert="80%"
+        backdropInvert="35%"
         backdropBlur="2px"
       />
       <ModalContent>

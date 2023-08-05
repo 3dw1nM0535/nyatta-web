@@ -21,7 +21,7 @@ const AddUnit = ({ isOpen, onClose }: Props) => {
   const onSubmit: SubmitHandler<Unit> = data => console.log(data)
 
   return (
-    <Modal motionPreset="slideInBottom" isCentered size="sm" isOpen={isOpen} onClose={onClose}>
+    <Modal scrollBehavior="inside" motionPreset="slideInBottom" isCentered size="sm" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay
         backdropFilter="auto"
         bg="none"

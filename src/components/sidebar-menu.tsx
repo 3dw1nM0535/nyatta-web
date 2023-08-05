@@ -1,14 +1,14 @@
 import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BsHouseAdd } from 'react-icons/bs'
+import { BsBuildingFillAdd } from 'react-icons/bs'
 import { FaHome } from 'react-icons/fa'
 import { MdOutlineExplore} from 'react-icons/md'
 
 const linkItems = [
   { label: "Overview", href: "/listings", icon: FaHome },
   { label: "Units", href: "/listings/units", icon: MdOutlineExplore },
-  { label: "Add", href: "/listings/setup", icon: BsHouseAdd },
+  { label: "Add", href: "/listings/setup", icon: BsBuildingFillAdd },
 ]
 
 const Sidebar = ({ onClose, ...rest }: any): JSX.Element => {

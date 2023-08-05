@@ -3,8 +3,9 @@
 import React, { useEffect, useMemo } from "react";
 
 import { useQuery } from '@apollo/client';
-import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Icon, SimpleGrid, Text } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation'
+import { BsHouseAdd } from 'react-icons/bs'
 
 import Units from './components/units'
 
@@ -46,6 +47,15 @@ const ListingsView: React.FC = () => {
       {units.length === 0 && (
         <Text>No units</Text>
       )}
+      <Center p={10} bg="gray.100">
+        <Icon
+          boxSize={10}
+          _hover={{
+            cursor: "pointer",
+          }}
+          as={BsHouseAdd}
+        />
+      </Center>
     </SimpleGrid>
   ) : pathname === "/listings/setup" ? (
     <LandlordView />

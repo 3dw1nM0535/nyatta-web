@@ -6,7 +6,7 @@ import { Box, BoxProps, Flex, Icon, Text } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BsHouseAdd } from 'react-icons/bs'
+import { BsBuildingFillAdd } from 'react-icons/bs'
 import { FaHome } from 'react-icons/fa'
 import { MdOutlineExplore } from 'react-icons/md'
 
@@ -20,7 +20,7 @@ interface SidebarProps extends BoxProps {
 const linkItems = [
   { label: "Overview", href: "/listings", icon: FaHome },
   { label: "Units", href: "/listings/units", icon: MdOutlineExplore },
-  { label: "Add", href: "/listings/setup", icon: BsHouseAdd },
+  { label: "Add", href: "/listings/setup", icon: BsBuildingFillAdd },
 ]
 
 const SidebarDesktop = ({ ...rest }: SidebarProps) => {

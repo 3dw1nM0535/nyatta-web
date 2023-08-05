@@ -3,10 +3,11 @@
 import React, { useEffect, useMemo } from "react";
 
 import { useQuery } from '@apollo/client';
-import { Box, Button, Center, Flex, Icon, Modal, ModalContent, ModalOverlay, ModalBody, ModalFooter, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Center, Flex, Icon, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation'
 import { BsHouseAdd } from 'react-icons/bs'
 
+import AddUnit from './components/add-unit'
 import Units from './components/units'
 
 import { trackPageView } from '@ga/analytics';
@@ -42,22 +43,7 @@ const ListingsView: React.FC = () => {
 
   return pathname === "/listings/units" ? (
     <SimpleGrid columns={{sm: 1, md: 2, lg: 3}} spacing="20px">
-      <Modal motionPreset="slideInBottom" isCentered size="sm" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          backdropFilter="auto"
-          bg="none"
-          backdropInvert="80%"
-          backdropBlur="2px"
-        />
-        <ModalContent>
-          <ModalBody>
-            Add unit
-          </ModalBody>
-          <ModalFooter>
-            <Button size="sm">Add</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <AddUnit isOpen={isOpen} onClose={onClose} />
       {units.length > 0 && units.map((unit: any) => (
         <Units key={unit.id} unit={unit} />
       ))}

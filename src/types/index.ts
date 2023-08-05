@@ -74,7 +74,7 @@ interface Bedroom {
   master: string;
 }
 
-interface Unit {
+export interface Unit {
   amenities: Amenity[];
   name: string;
   type: string;

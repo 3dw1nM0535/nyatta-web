@@ -4,8 +4,8 @@ import { array, object, number, string } from "yup";
 export const DescriptionSchema = object().shape({
   name: string()
     .trim()
-    .matches(/^[A-Za-z ]+$/i, {
-      message: "Property name should be alphabetic only",
+    .matches(/^[A-Z0-9a-z ]+$/i, {
+      message: "Property name should be alphanumeric",
       excludeEmptyString: true,
     })
     .required("Property name is required"),
@@ -24,10 +24,10 @@ export const LocationSchema = object().shape({
 
 export const PriceSchema = object().shape({
   minPrice: number()
-    .min(1, "Zero is not valid")
+    .min(1, "Not valid")
     .required("Minimum price is required"),
   maxPrice: number()
-    .min(1, "Zero is not valid")
+    .min(1, "Not valid")
     .required("Maximum price is required"),
 });
 
@@ -130,4 +130,15 @@ export const UserOnboardingSchema = object().shape({
 
 export const MailingSchema = object().shape({
   email: string().required("Email required").email("Enter valid email"),
+})
+
+export const UnitSchema = object().shape({
+  name: string().trim()
+    .matches(/^[A-Z0-9a-z ]+$/i, {
+      message: "Unit name should be alphanumeric",
+      excludeEmptyString: true,
+    }).required("Name is required"),
+  baths: number().min(1, "Not valid"),
+  price: number().min(1, "Not valid"),
+  type: string().required("Required"),
 })

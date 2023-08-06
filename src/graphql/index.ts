@@ -19,3 +19,4 @@ export * from './mutations/createUser';
 export * from './mutations/setupProperty'
 export * from './mutations/onboardUser'
 export * from './mutations/saveMail'
+export * from './mutations/addPropertyUnit'

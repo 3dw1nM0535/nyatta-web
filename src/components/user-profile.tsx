@@ -38,13 +38,12 @@ const UserMenu = ({ ...rest }): JSX.Element => {
         <Flex>
           <Menu>
             <MenuButton>
-              <HStack>
-                <Avatar src={`${session?.user?.image}`} loading="eager" />
-              </HStack>
+              <Avatar src={`${session?.user?.image}`} loading="eager" />
             </MenuButton>
             <MenuList>
+              <MenuItem>{`${session?.user?.name}`}</MenuItem>
               <MenuItem>{session?.user?.email}</MenuItem>
-              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+              <MenuItem textDecoration="underline" onClick={handleSignOut}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

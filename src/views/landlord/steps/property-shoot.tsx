@@ -23,7 +23,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 
 import { trackEvent } from "@ga/analytics";
-import { uploadImage as UPLOAD_IMAGE, SETUP_PROPERTY } from "@gql";
+import { uploadImage as UPLOAD_IMAGE, SETUP_PROPERTY, GET_USER_PROPERTIES } from "@gql";
 import { usePropertyOnboarding, useTrackers } from "@hooks";
 import { type ContactPersonForm } from "@types";
 import { ContactPersonSchema } from "form/validations";
@@ -124,7 +124,7 @@ const Shoot = (): JSX.Element => {
             setStep('submitted')
           }
         },
-        refetchQueries: ['getUserProperties'],
+        refetchQueries: [GET_USER_PROPERTIES],
         awaitRefetchQueries: true,
       })
     }

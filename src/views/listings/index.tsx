@@ -19,7 +19,7 @@ import LandlordView from 'views/landlord'
 const ListingsView: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const pathname = usePathname()
-  const { defaultListing } = useListings()
+  const { defaultListing, hasListings } = useListings()
   const { data, loading: loadingListingOverview } = useQuery(GET_LISTING_OVERVIEW, {
     variables: {
       propertyId: defaultListing?.value,
@@ -50,16 +50,18 @@ const ListingsView: React.FC = () => {
       {units.length === 0 && (
         <Text>No units</Text>
       )}
-      <Center p={10} bg="gray.100">
-        <Icon
-          boxSize={10}
-          _hover={{
-            cursor: "pointer",
-          }}
-          onClick={onOpen}
-          as={BsHouseAdd}
-        />
-      </Center>
+      {hasListings && (
+        <Center p={10} bg="gray.100">
+          <Icon
+            boxSize={10}
+            _hover={{
+              cursor: "pointer",
+            }}
+            onClick={onOpen}
+            as={BsHouseAdd}
+          />
+        </Center>
+      )}
     </SimpleGrid>
   ) : pathname === "/listings/setup" ? (
     <LandlordView />

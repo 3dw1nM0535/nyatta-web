@@ -51,6 +51,18 @@ export const OnboardingProvider = ({ children }: PropsWithChildren) => {
   const { data } = useQuery(GET_TOWNS, {
     skip: status === 'unauthenticated' || status === 'loading',
   });
+  const reset = () => {
+    setDescriptionForm(defaultDescriptionForm);
+    setAmenitiesForm(defaultAmenitiesForm);
+    setLocationForm(defaultLocationForm);
+    setPriceForm(defaultPriceForm);
+    setCaretakerForm(defaultCaretakerForm);
+    setUnitsForm(defaultUnitsForm);
+    setUnitsCount(1);
+    setPropertyType(defaultPropertyType);
+    setContactPersonForm(defaultContactPerson);
+    setStep("description");
+  }
   const locations = data?.getTowns.map((item: any) => ({
     id: item.id,
     value: item.town.toLowerCase(),
@@ -84,6 +96,7 @@ export const OnboardingProvider = ({ children }: PropsWithChildren) => {
         setPropertyType,
         contactPersonForm,
         setContactPersonForm,
+        reset,
       }}
     >
       {children}

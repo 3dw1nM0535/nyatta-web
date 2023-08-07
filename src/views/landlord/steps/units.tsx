@@ -171,7 +171,7 @@ const Units = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Accordion allowToggle h="100%">
+      <Accordion h="100%">
         {fields.length > 0 &&
           fields.map((unit, unitIndex: number) => {
             const type = watch(`units.${unitIndex}.type`);

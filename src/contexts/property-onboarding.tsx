@@ -39,6 +39,7 @@ interface OnboardingContext {
   setPropertyType: Dispatch<SetStateAction<PropertyTypeForm>>;
   contactPersonForm: ContactPersonForm;
   setContactPersonForm: Dispatch<SetStateAction<ContactPersonForm>>;
+  reset: () => void;
 }
 
 export const OnboardingContext = createContext<OnboardingContext>({
@@ -65,4 +66,5 @@ export const OnboardingContext = createContext<OnboardingContext>({
   setPropertyType: () => {},
   contactPersonForm: {} as ContactPersonForm,
   setContactPersonForm: () => {},
+  reset: () => {},
 });

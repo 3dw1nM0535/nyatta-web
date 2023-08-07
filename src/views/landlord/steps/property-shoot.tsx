@@ -15,6 +15,7 @@ import {
   SimpleGrid,
   Spinner,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSession } from "next-auth/react";
@@ -30,9 +31,10 @@ import { ContactPersonSchema } from "form/validations";
 
 const Shoot = (): JSX.Element => {
   const { data: session } = useSession()
+  const toast = useToast()
   const [uploadImage, { loading: uploadingImage }] = useMutation(UPLOAD_IMAGE);
   const [setupProperty, { loading: settingupProperty }] = useMutation(SETUP_PROPERTY)
-  const { setStep, descriptionForm, locationForm, propertyType, unitsForm, caretakerForm, contactPersonForm, setContactPersonForm } =
+  const { setStep, descriptionForm, locationForm, propertyType, unitsForm, caretakerForm, contactPersonForm, setContactPersonForm, reset } =
     usePropertyOnboarding();
   const {
     handleSubmit,
@@ -121,7 +123,15 @@ const Shoot = (): JSX.Element => {
           if (data.setupProperty.success === 'okay') {
             trackEvent({ action: 'setup-property', category: 'property' })
             trackAction('setup-property')
-            setStep('submitted')
+            reset()
+            toast({
+              title: "Congratulations!",
+              description: "We have received your listing",
+              status: "success",
+              isClosable: true,
+              duration: 3000,
+              position: "top-right",
+            })
           }
         },
         refetchQueries: [GET_USER_PROPERTIES],

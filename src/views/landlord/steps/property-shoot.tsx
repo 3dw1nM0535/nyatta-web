@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -11,7 +11,6 @@ import {
   Image,
   Input,
   Icon,
-  Spacer,
   SimpleGrid,
   Spinner,
   Textarea,
@@ -211,14 +210,6 @@ const Shoot = (): JSX.Element => {
         </Box>
       </SimpleGrid>
       <HStack mt={{ base: 4, md: 6 }}>
-        <Button
-          colorScheme="green"
-          onClick={goBack}
-          leftIcon={<ArrowBackIcon />}
-        >
-          Go Back
-        </Button>
-        <Spacer />
         <Button
           colorScheme="green"
           isLoading={settingupProperty}

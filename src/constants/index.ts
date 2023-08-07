@@ -79,4 +79,4 @@ export const defaultContactPerson: ContactPersonForm = {
   shootDate: "",
 };
 
-export const PrivateRoutes = ["/property/setup", "/listings", "/onboarding/user"];
+export const PrivateRoutes = ["/onboarding/user"];

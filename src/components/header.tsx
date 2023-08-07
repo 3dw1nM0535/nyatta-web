@@ -1,4 +1,5 @@
 import { Flex, IconButton, Text } from "@chakra-ui/react";
+import Link from 'next/link'
 import { FaBars } from "react-icons/fa";
 
 import UserMenu from "./user-profile";
@@ -17,7 +18,7 @@ const Header = ({ onOpen }: any): JSX.Element => (
       justifyContent={{ base: "space-between", md: "flex-start" }}
     >
       <Flex display={{ base: "none", md: "flex" }} alignItems="center">
-        <Text color="green.800" fontSize="4xl" fontWeight="bold">
+        <Text as={Link} href="/" color="green.800" fontSize="4xl" fontWeight="bold">
           Nyatta
         </Text>
       </Flex>

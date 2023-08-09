@@ -3,6 +3,7 @@
 import React from 'react'
 
 import { Box, Center, Icon, VStack, Text } from "@chakra-ui/react";
+import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { FaCheckCircle } from 'react-icons/fa'
 
@@ -25,8 +26,9 @@ const OnboardingView: React.FC = () => {
         {onboarding && status === "sign-in" && <SignInForm />}
         {onboarding && status === "pending" && <VerifySignInForm />}
         {!onboarding && (
-          <Center>
+          <Center gap={4} flexDirection="column">
             <Icon boxSize="3em" as={FaCheckCircle} color="green.700" />
+            <Text as={Link} color="green.800" href="/listings" textDecoration="underline">Proceed</Text>
           </Center>
         )}
       </Box>

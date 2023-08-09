@@ -20,7 +20,7 @@ interface Props {
 
 const Providers = ({ children }: Props) => (
     <>
-      <SessionProvider refetchInterval={3600} refetchOnWindowFocus={true}>
+      <SessionProvider refetchWhenOffline={false} refetchInterval={86400} refetchOnWindowFocus={true}>
         <ApolloProvider>
           <CacheProvider>
             <ChakraProvider theme={theme}>

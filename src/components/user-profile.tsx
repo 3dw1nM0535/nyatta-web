@@ -20,7 +20,7 @@ const UserMenu = ({ ...rest }): JSX.Element => {
   const handleSignIn = () => {
     trackEvent({ action: 'sign-in', category: 'user' })
     trackAction('sign-in')
-    signIn("google")
+    signIn("google", { callbackUrl: "/listings" })
   }
 
   const handleSignOut = () => {

@@ -19,7 +19,6 @@ import {
   Textarea,
   useDisclosure,
   Spinner,
-  Select,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDropzone } from "react-dropzone";
@@ -89,7 +88,7 @@ const Caretaker: React.FC = () => {
         variables: {
           input: {
             phone: `${caretakerForm.countryCode}${data.phoneNumber}`,
-            countryCode: "KE",
+            countryCode: "KE", // TODO this is confusing with form countryCode
           },
         },
         // Proceed to next step once successfull
@@ -138,9 +137,7 @@ const Caretaker: React.FC = () => {
             >
               <FormLabel>Phone Number</FormLabel>
               <HStack>
-                <Select {...register("countryCode")}>
-                  <option value="+254">+254</option>
-                </Select>
+                <Input maxW="88px" {...register("countryCode")} disabled />
                 <Input {...register("phoneNumber")} type="tel" />
               </HStack>
               {errors?.phoneNumber != null && (

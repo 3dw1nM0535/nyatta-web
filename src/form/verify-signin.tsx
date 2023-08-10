@@ -70,7 +70,7 @@ const VerifySignInForm = (): JSX.Element => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={Boolean(errors?.code)}>
         <FormLabel>Verify Code</FormLabel>
-        <HStack>
+        <HStack maxW="320px">
           <Input {...register("code")} type="number" />
           <Button isLoading={verifyingCode || creatingUser} type="submit">
             Sign In

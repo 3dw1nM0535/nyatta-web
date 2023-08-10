@@ -13,7 +13,7 @@ import {
 
 export const defaultSignInForm: SignInForm = {
   phone: undefined,
-  countryCode: undefined,
+  countryCode: "+254",
 };
 
 export const FormSteps: OnboardingStep[] = [
@@ -27,13 +27,13 @@ export const FormSteps: OnboardingStep[] = [
 ];
 
 export const FormStepTitle: Record<OnboardingStep, string> = {
-  description: "Property name",
-  location: "Describe your property by locality",
+  description: "Property",
+  location: "Location",
   caretaker:
-    "Immediate contact person. This can be the caretaker",
-  units: "How best can you describe your units?",
-  type: "Property type?",
-  shoot: "Schedule a professional shoot",
+    "Caretaker",
+  units: "Units",
+  type: "Property Type",
+  shoot: "Shoot Date",
   submitted: "You're all set🎉!",
 };
 
@@ -57,7 +57,7 @@ export const defaultCaretakerForm: CaretakerForm = {
   lastName: "",
   phoneNumber: "",
   idVerification: "",
-  countryCode: "",
+  countryCode: "+254",
 };
 
 export const defaultUnitsForm: UnitsForm = {

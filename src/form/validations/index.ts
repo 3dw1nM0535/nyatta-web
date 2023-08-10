@@ -73,7 +73,7 @@ export const CaretakerSchema = object().shape({
       message: "Expects phone number",
       excludeEmptyString: true,
     })
-    .test("valid-phone", "You region is not supported yet", (value) =>
+    .test("valid-phone", "Invalid phone number", (value) =>
       isValidPhoneNumber(value!, "KE")
     ),
   idVerification: string().required("ID verification required"),
@@ -97,16 +97,16 @@ export const SignInSchema = object().shape({
       message: "Expects phone number",
       excludeEmptyString: true,
     })
-    .test("valid-phone", "You region is not supported yet", (value) =>
+    .test("valid-phone", "Invalid phone number", (value) =>
       isValidPhoneNumber(value!, "KE")
     ),
 });
 
 export const VerifySignInSchema = object().shape({
   code: string()
-    .required("Phone number required")
+    .required("Code is required")
     .matches(/^[0-9]+$/i, {
-      message: "Expects phone number",
+      message: "Expects digits only",
       excludeEmptyString: true,
     })
     .length(6, "Enter 6-digit code"),

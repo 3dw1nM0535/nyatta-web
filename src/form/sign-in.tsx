@@ -7,7 +7,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Select,
   Input,
   HStack,
 } from "@chakra-ui/react";
@@ -39,7 +38,7 @@ const SignInForm = (): JSX.Element => {
       await sendVerificationCode({
         variables: {
           input: {
-            countryCode: "KE",
+            countryCode: "KE", // TODO this is confusing with form countryCode
             phone: `${data.countryCode}${data.phone}`,
           },
         },
@@ -54,10 +53,8 @@ const SignInForm = (): JSX.Element => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={Boolean(errors?.phone)}>
         <FormLabel>Phone</FormLabel>
-        <HStack>
-          <Select {...register("countryCode")}>
-            <option value="+254">+254</option>
-          </Select>
+        <HStack maxW="320px">
+          <Input {...register("countryCode")} disabled />
           <Input type="tel" {...register("phone")} />
           <Button
             type="submit"

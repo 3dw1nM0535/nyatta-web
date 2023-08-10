@@ -138,7 +138,7 @@ export const UnitSchema = object().shape({
       message: "Unit name should be alphanumeric",
       excludeEmptyString: true,
     }).required("Name is required"),
-  baths: number().min(1, "Not valid"),
+  baths: number().min(0, "Not valid"),
   price: number().min(1, "Not valid"),
   type: string().required("Required"),
 })
